@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  ion-icon.github {
+    font-size: 30px;
+    color: rgb(4, 8, 13);
+  }
+  ion-icon.linkedin {
+    font-size: 30px;
+    color: rgb(13, 91, 186);
+  }
+  @media (prefers-color-scheme: dark) {
+    ion-icon.github {
+      font-size: 30px;
+      color: white;
+    }
+  }
+}

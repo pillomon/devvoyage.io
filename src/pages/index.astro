@@ -1,7 +1,11 @@
 ---
-import Layout from '@/components/layouts/Layout/Layout.astro';
+import Layout from '@/components/templates/Layout/index.astro';
 
-const pageTitle = "About Me";
+const pageTitle = 'Home';
+
+return Astro.redirect('/blog');
 ---
 
-<Layout title={pageTitle}>test</Layout>
+<Layout title={pageTitle}>
+  <a href="/blog" class="hover:underline hover:underline-offset-2">Go blog</a>
+</Layout>

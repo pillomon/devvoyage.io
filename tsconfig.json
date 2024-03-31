@@ -4,6 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-    }
+      "#/*": ["public/*"]
+    },
+    "strictNullChecks": true,
+    "allowJs": true
   }
 }

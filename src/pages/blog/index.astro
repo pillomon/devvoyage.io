@@ -1,0 +1,31 @@
+---
+import Layout from '@/components/templates/Layout/index.astro';
+import Post from '@/components/Post/index.astro';
+import { getCollection } from 'astro:content';
+import { remarkReadingTime } from 'remark-reading-time.mjs';
+
+const blogEntries = await getCollection('blog');
+---
+
+<Layout title="blog">
+  <h1 class="text-6xl font-bold dark:text-white">Blog</h1>
+  <section class="mt-20 flex flex-col items-start justify-start gap-10">
+    {
+      blogEntries.map((post) => {
+        if (!post.data.isDraft)
+          return (
+            <Post
+              data={{
+                title: post.data.title,
+                thumbnail: post.data.thumbnail,
+                createdDate: post.data.createdDate,
+                modifiedDate: post.data.modifiedDate,
+                topic: post.data.topic,
+                slug: post.slug,
+              }}
+            />
+          );
+      })
+    }
+  </section>
+</Layout>

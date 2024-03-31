@@ -1,0 +1,44 @@
+---
+import {
+  LAYOUT_MAX_WIDTH_SIZE,
+  LAYOUT_PADDING_X_SIZE,
+} from '@/constants/styles';
+import FormatLib from '@/libs/formatLib';
+
+const { cn } = FormatLib;
+---
+
+<header
+  class={cn(
+    LAYOUT_PADDING_X_SIZE,
+    'flex h-[60px] w-full mx-auto items-center justify-between px-[20px] hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-500',
+  )}
+>
+  <a href="/"
+    ><span class="text-2xl font-bold dark:text-white"
+      >de<strong class="text-[#FFBE98]">vv</strong>oyage</span
+    ></a
+  >
+  <ul class="flex items-center gap-2">
+    <li class="flex">
+      <a
+        href="https://github.com/pillomon"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="flex"
+      >
+        <ion-icon class="github" name="logo-github"></ion-icon>
+      </a>
+    </li>
+    <li class="flex">
+      <a
+        href="https://www.linkedin.com/in/pillsang-sung-b4aba417a/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="flex"
+      >
+        <ion-icon class="linkedin" name="logo-linkedin"></ion-icon>
+      </a>
+    </li>
+  </ul>
+</header>

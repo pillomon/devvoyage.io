@@ -1,0 +1,19 @@
+---
+import FormatLib from '@/libs/formatLib';
+import {
+  LAYOUT_MAX_WIDTH_SIZE,
+  LAYOUT_PADDING_X_SIZE,
+} from '@/constants/styles';
+
+const { cn } = FormatLib;
+---
+
+<main
+  class={cn(
+    LAYOUT_MAX_WIDTH_SIZE,
+    LAYOUT_PADDING_X_SIZE,
+    'mx-auto min-h-screen w-full mt-10',
+  )}
+>
+  <slot />
+</main>
