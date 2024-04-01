@@ -13,12 +13,20 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, remarkPluginFrontmatter } = await entry.render();
 ---
 
 <Layout title={entry.data.title}>
+  <div class="mb-16 flex flex-col gap-6">
+    <h1 class="text-6xl font-bold dark:text-white">{entry.data.title}</h1>
+    <p class="flex w-full items-center gap-1">
+      <ion-icon class="time" name="time-outline"></ion-icon>
+      <span class="text-sm dark:text-white"
+        >{remarkPluginFrontmatter.minutesRead}</span
+      >
+    </p>
+  </div>
   <Prose>
-    <h1>{entry.data.title}</h1>
     <Content />
   </Prose>
 </Layout>

@@ -11,9 +11,17 @@
     font-size: 30px;
     color: rgb(13, 91, 186);
   }
+  ion-icon.time {
+    font-size: 12px;
+    color: rgb(4, 8, 13);
+  }
   @media (prefers-color-scheme: dark) {
     ion-icon.github {
       font-size: 30px;
+      color: white;
+    }
+    ion-icon.time {
+      font-size: 14px;
       color: white;
     }
   }

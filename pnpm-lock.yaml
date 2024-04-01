@@ -14,12 +14,6 @@ dependencies:
   dayjs:
     specifier: ^1.11.10
     version: 1.11.10
-  mdast-util-to-string:
-    specifier: ^4.0.0
-    version: 4.0.0
-  reading-time:
-    specifier: ^1.5.0
-    version: 1.5.0
   tailwind-merge:
     specifier: ^2.2.2
     version: 2.2.2
@@ -55,6 +49,9 @@ devDependencies:
   eslint-plugin-prettier:
     specifier: ^5.1.3
     version: 5.1.3(eslint-config-prettier@9.1.0)(eslint@8.57.0)(prettier@3.2.5)
+  mdast-util-to-string:
+    specifier: ^4.0.0
+    version: 4.0.0
   postcss:
     specifier: ^8.4.38
     version: 8.4.38
@@ -67,6 +64,9 @@ devDependencies:
   prettier-plugin-tailwindcss:
     specifier: ^0.5.13
     version: 0.5.13(prettier-plugin-astro@0.13.0)(prettier@3.2.5)
+  reading-time:
+    specifier: ^1.5.0
+    version: 1.5.0
   tailwindcss:
     specifier: ^3.4.3
     version: 3.4.3
@@ -3798,7 +3798,7 @@ packages:
 
   /reading-time@1.5.0:
     resolution: {integrity: sha512-onYyVhBNr4CmAxFsKS7bz+uTLRakypIe4R+5A824vBSkQy/hB3fZepoVEf8OVAxzLvK+H/jm9TzpI3ETSm64Kg==}
-    dev: false
+    dev: true
 
   /regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}
