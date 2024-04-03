@@ -28,10 +28,10 @@ const alternativeImage =
   backUpImageData[Math.floor(Math.random() * backUpImageData.length)];
 ---
 
-<a href={`/blog/${slug}`}>
-  <article
-    id=`article-${slug}`
-    class="group flex w-full cursor-pointer flex-col items-start justify-between gap-[20px] medium:flex-row medium:items-center"
+<article id=`article-${slug}` class="group w-full">
+  <a
+    href={`/blog/${slug}`}
+    class="flex w-full flex-col items-start justify-between gap-[20px] medium:flex-row medium:items-center"
   >
     <picture
       class="flex h-[110px] w-[140px] items-center justify-center overflow-hidden rounded-[22px] medium:h-[172px] medium:w-[208px] extra:h-[244px] extra:w-[288px]"
@@ -70,5 +70,5 @@ const alternativeImage =
         <span class="line-clamp-3">{topic}</span>
       </p>
     </div>
-  </article>
-</a>
+  </a>
+</article>

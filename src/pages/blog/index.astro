@@ -3,11 +3,13 @@ import Layout from '@/components/templates/Layout/index.astro';
 import Post from '@/components/Post/index.astro';
 import { getCollection } from 'astro:content';
 import { remarkReadingTime } from 'remark-reading-time.mjs';
+import { page } from 'dist/pages/blog.astro.mjs';
 
+const pageTitle = `blog`;
 const blogEntries = await getCollection('blog');
 ---
 
-<Layout title="blog">
+<Layout title={pageTitle}>
   <h1 class="text-6xl font-bold dark:text-white">Blog</h1>
   <section class="mt-20 flex flex-col items-start justify-start gap-10">
     {

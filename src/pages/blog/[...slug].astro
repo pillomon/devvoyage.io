@@ -14,9 +14,10 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
+const pageTitle = `blog | ${entry.data.title}`;
 ---
 
-<Layout title={entry.data.title}>
+<Layout title={pageTitle}>
   <div class="mb-16 flex flex-col gap-6">
     <h1 class="text-6xl font-bold dark:text-white">{entry.data.title}</h1>
     <p class="flex w-full items-center gap-1">
