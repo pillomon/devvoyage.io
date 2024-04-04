@@ -1,14 +1,15 @@
 ---
 import Header from '@/components/templates/Header/index.astro';
 import Main from '@/components/templates/Main/index.astro';
+import { LayoutType } from '@/constants/styles';
 import '@/styles/main.css';
 
 interface Props {
   title: string;
+  type: LayoutType;
 }
 
-const { title } = Astro.props;
-const LAYOUT_WIDTH_SIZE = 'max-w-[992px]';
+const { title, type } = Astro.props;
 ---
 
 <html lang="ko">
@@ -20,7 +21,7 @@ const LAYOUT_WIDTH_SIZE = 'max-w-[992px]';
   </head>
   <body class="dark:bg-gray-900">
     <Header />
-    <Main>
+    <Main type={type}>
       <slot />
     </Main>
     <script
