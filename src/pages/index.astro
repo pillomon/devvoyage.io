@@ -5,5 +5,20 @@ const pageTitle = 'Home';
 ---
 
 <Layout title={pageTitle}>
-  <a href="/blog" class="hover:underline hover:underline-offset-2">Go blog</a>
+  <ul class="flex flex-col items-start justify-start gap-10">
+    <li>
+      <a
+        href="/blog"
+        class="text-6xl font-bold hover:underline hover:underline-offset-auto dark:text-white"
+        >Blog</a
+      >
+    </li>
+    <li>
+      <a
+        href="/lab"
+        class="text-6xl font-bold hover:underline hover:underline-offset-auto dark:text-white"
+        >Lab</a
+      >
+    </li>
+  </ul>
 </Layout>

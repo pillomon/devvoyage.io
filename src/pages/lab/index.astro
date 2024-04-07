@@ -1,5 +1,22 @@
 ---
+import Layout from '@/components/templates/Layout/index.astro';
 
+const pageTitle = 'Laboratory';
+
+const LabRoute = {
+  REACT_HOOK_FOMR_WITH_ZOD: 'react-hook-form-with-zod',
+};
 ---
 
-<div></div>
+<Layout title={pageTitle}>
+  <h1 class="text-6xl font-bold dark:text-white">Lab</h1>
+  <section class="mt-20 flex flex-col items-start justify-start gap-10">
+    <h2>
+      <a
+        href={`/lab/${LabRoute.REACT_HOOK_FOMR_WITH_ZOD}`}
+        class="text-xl font-semibold transition-all hover:text-[#50C878] medium:text-2xl extra:text-3xl dark:text-white"
+        >React Hook Form with Zod</a
+      >
+    </h2>
+  </section>
+</Layout>
