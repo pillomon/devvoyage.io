@@ -1,15 +1,11 @@
 ---
-import { LAYOUT_MAX_WIDTH_SIZE } from '@/constants/styles';
 import FormatLib from '@/libs/formatLib';
 
 const { cn } = FormatLib;
 ---
 
 <header
-  class={cn(
-    LAYOUT_MAX_WIDTH_SIZE,
-    'flex h-[60px] w-full mx-auto items-center justify-between',
-  )}
+  class="common-layout mx-auto flex h-[60px] w-full items-center justify-between"
 >
   <a href="/"
     ><span class="text-2xl font-bold dark:text-white"

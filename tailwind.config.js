@@ -14,6 +14,13 @@ export default {
       fontFamily: {
         sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%',
+          },
+        },
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')],

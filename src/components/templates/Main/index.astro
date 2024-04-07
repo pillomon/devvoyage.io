@@ -1,26 +1,9 @@
 ---
 import FormatLib from '@/libs/formatLib';
-import {
-  LayoutType,
-  BLOG_LIST_MAX_WIDTH_SIZE,
-  BLOG_DETAIL_MAX_WIDTH_SIZE,
-} from '@/constants/styles';
 
-interface Props {
-  type: LayoutType;
-}
-
-const { type } = Astro.props;
 const { cn } = FormatLib;
 ---
 
-<main
-  class={cn(
-    type === LayoutType.BLOG_LIST
-      ? BLOG_LIST_MAX_WIDTH_SIZE
-      : BLOG_DETAIL_MAX_WIDTH_SIZE,
-    'mx-auto min-h-screen w-full mt-10',
-  )}
->
+<main class="common-layout mx-auto mt-10 w-full">
   <slot />
 </main>

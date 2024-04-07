@@ -2,23 +2,21 @@
 import Layout from '@/components/templates/Layout/index.astro';
 import Prose from '@/components/Prose/index.astro';
 import { getCollection } from 'astro:content';
-import { LayoutType } from '@/constants/styles';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
-
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry },
+    props: { entry: entry },
   }));
 }
 
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
-const pageTitle = `blog | ${entry.data.title}`;
+const pageTitle = `${entry.data.title} | blog`;
 ---
 
-<Layout title={pageTitle} type={LayoutType.BLOG_DETAIL}>
+<Layout title={pageTitle}>
   <div class="mb-16 flex flex-col gap-6">
     <h1 class="text-6xl font-bold dark:text-white">{entry.data.title}</h1>
     <p class="flex w-full items-center gap-1">

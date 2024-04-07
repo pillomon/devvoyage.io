@@ -26,3 +26,8 @@
     }
   }
 }
+@layer utilities {
+  .common-layout {
+    @apply max-w-[992px] px-[30px];
+  }
+}

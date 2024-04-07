@@ -1,21 +1,20 @@
 ---
 import Layout from '@/components/templates/Layout/index.astro';
-import Post from '@/components/Post/index.astro';
+import PostCard from '@/components/PostCard/index.astro';
 import { getCollection } from 'astro:content';
-import { LayoutType } from '@/constants/styles';
 
 const pageTitle = `blog`;
 const blogEntries = await getCollection('blog');
 ---
 
-<Layout title={pageTitle} type={LayoutType.BLOG_LIST}>
+<Layout title={pageTitle}>
   <h1 class="text-6xl font-bold dark:text-white">Blog</h1>
   <section class="mt-20 flex flex-col items-start justify-start gap-10">
     {
       blogEntries.map((post) => {
         if (!post.data.isDraft)
           return (
-            <Post
+            <PostCard
               data={{
                 title: post.data.title,
                 thumbnail: post.data.thumbnail,
