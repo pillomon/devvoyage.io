@@ -1,9 +1,19 @@
 ---
 import FormatLib from '@/libs/formatLib';
 
+interface Props {
+  isIsland?: boolean;
+}
+
+const { isIsland } = Astro.props;
 const { cn } = FormatLib;
 ---
 
-<main class="common-layout mx-auto mt-10 w-full">
+<main
+  class={cn(
+    isIsland ? 'island-layout' : 'common-layout',
+    'mx-auto mt-10 w-full"',
+  )}
+>
   <slot />
 </main>

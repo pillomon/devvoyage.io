@@ -38,4 +38,7 @@
   .common-layout {
     @apply max-w-[992px] px-[30px];
   }
+  .island-layout {
+    @apply w-full px-[30px];
+  }
 }
