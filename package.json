@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^3.1.1",
+    "@hookform/resolvers": "^3.3.4",
+    "@tailwindcss/typography": "^0.5.12",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
     "astro": "^4.5.9",
@@ -27,7 +29,6 @@
   "devDependencies": {
     "@astrojs/check": "^0.5.10",
     "@astrojs/tailwind": "^5.1.0",
-    "@tailwindcss/typography": "^0.5.12",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
     "autoprefixer": "^10.4.19",
