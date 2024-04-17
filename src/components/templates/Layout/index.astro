@@ -96,7 +96,7 @@ const { title, isIsland } = Astro.props;
   </head>
   <body class="dark:bg-gray-900">
     <Header />
-    <Main isIsland>
+    <Main isIsland={isIsland}>
       <slot />
     </Main>
     <script

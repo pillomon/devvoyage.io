@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --prime-color: #ffbe98;
+}
+
 @layer base {
   ion-icon.github {
     font-size: 30px;
@@ -34,11 +38,22 @@
     }
   }
 }
-@layer utilities {
+@layer components {
   .common-layout {
-    @apply max-w-[992px] px-[30px];
+    max-width: 992px;
+    padding: 30px;
   }
   .island-layout {
-    @apply w-full px-[30px];
+    width: 100%;
+    padding: 30px;
+  }
+  .highlighter-animation {
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s;
+  }
+  .highlighter-animation:hover {
+    background-size: 100% 100%;
+    background-image: linear-gradient(transparent 70%, var(--prime-color) 30%);
   }
 }

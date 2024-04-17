@@ -7,11 +7,12 @@ interface Props {
 
 const { isIsland } = Astro.props;
 const { cn } = FormatLib;
+console.log(isIsland);
 ---
 
 <main
   class={cn(
-    isIsland ? 'island-layout' : 'common-layout',
+    !!isIsland ? 'island-layout' : 'common-layout',
     'mx-auto mt-10 w-full"',
   )}
 >

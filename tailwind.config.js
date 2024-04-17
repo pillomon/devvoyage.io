@@ -1,5 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
+const calcLineHeight = (fontSize) => fontSize * 1.5;
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -11,6 +13,9 @@ export default {
       extra: '1200px',
     },
     extend: {
+      colors: {
+        prime: '#FFBE98',
+      },
       fontFamily: {
         sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
       },
@@ -18,6 +23,21 @@ export default {
         DEFAULT: {
           css: {
             maxWidth: '100%',
+            h2: {
+              fontSize: '30px',
+              lineHeight: `${calcLineHeight(30)}px`,
+            },
+            h3: {
+              fontSize: '24px',
+              lineHeight: `${calcLineHeight(24)}px`,
+            },
+            a: {
+              color: '#ffffff',
+              '&:hover': {
+                color: '#FFBE98',
+              },
+              textDecoration: 'none',
+            },
           },
         },
       },

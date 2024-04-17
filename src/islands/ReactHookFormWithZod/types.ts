@@ -11,7 +11,7 @@ export interface SignUpFormData {
 }
 export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  required?: boolean;
+  isRequired?: boolean;
   isError?: boolean;
   errorMessage?: string;
 }

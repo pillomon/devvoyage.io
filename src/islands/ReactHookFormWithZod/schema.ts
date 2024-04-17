@@ -19,8 +19,8 @@ const Schema = z
         /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?\/~`-]).*$/,
         { message: 'Invalid password.' },
       ),
-    firstName: z.string(),
-    lastName: z.string(),
+    firstName: z.string().min(1),
+    lastName: z.string().min(1),
     phoneNumber: z.string(),
     consentCheckbox: z.boolean(),
   })
