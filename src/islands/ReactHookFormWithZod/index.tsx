@@ -3,7 +3,7 @@ import type { SignUpFormData, TextFieldProps } from './types';
 import { Form, useForm } from 'react-hook-form';
 import FormatLib from '@/libs/formatLib';
 import Schema from './schema';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const TextField = React.forwardRef(
   (
@@ -88,6 +88,11 @@ function ReactHookFormsWithZodIsland() {
     alert('Success!');
     reset();
   };
+
+  useEffect(() => {
+    console.log(`isDirty: ${formState.isDirty}`);
+    console.log(`isValid: ${formState.isValid}`);
+  }, [formState.isDirty, formState.isValid]);
 
   return (
     <div className="mx-auto flex w-full max-w-[768px] flex-col items-center gap-[50px] bg-gray-200 p-[20px]">

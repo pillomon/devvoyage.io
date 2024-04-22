@@ -5,6 +5,8 @@ import { getCollection } from 'astro:content';
 
 const pageTitle = `Blog`;
 const blogEntries = await getCollection('blog');
+const isProd = import.meta.env.PROD;
+const isDev = import.meta.env.DEV;
 ---
 
 <Layout title={pageTitle}>
@@ -12,7 +14,7 @@ const blogEntries = await getCollection('blog');
   <section class="mt-20 flex flex-col items-start justify-start gap-10">
     {
       blogEntries.map((post) => {
-        if (!post.data.isDraft)
+        if ((!post.data.isDraft && isProd) || isDev)
           return (
             <PostCard
               data={{
