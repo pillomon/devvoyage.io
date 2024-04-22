@@ -42,10 +42,14 @@ const alternativeImage =
             src={thumbnail.src}
             alt={thumbnail?.alt}
             inferSize
-            class="object-cover"
+            class="h-full w-full object-cover"
           />
         ) : (
-          <Image src={alternativeImage} alt="thumbnail" class="object-cove" />
+          <Image
+            src={alternativeImage}
+            alt="thumbnail"
+            class="h-full w-full object-cover"
+          />
         )
       }
     </picture>
