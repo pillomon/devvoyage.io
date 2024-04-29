@@ -1,0 +1,20 @@
+<div class="fixed left-0 top-0 h-[5px] w-full bg-transparent">
+  <div id="scroll-indicator" class="h-full w-0 bg-prime transition-all"></div>
+</div>
+
+<script>
+  window.onscroll = function () {
+    myFunction();
+  };
+
+  const myFunction = () => {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const myBarEl = document.getElementById('scroll-indicator');
+    if (myBarEl) myBarEl.style.width = scrolled + '%';
+  };
+</script>

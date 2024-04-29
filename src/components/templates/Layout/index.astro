@@ -1,14 +1,16 @@
 ---
 import Header from '@/components/templates/Header/index.astro';
 import Main from '@/components/templates/Main/index.astro';
+import ScrollIndicator from '@/components/templates/ScrollIndicator/index.astro';
 import '@/styles/global.css';
 
 interface Props {
   title: string;
   isIsland?: boolean;
+  isPost?: boolean;
 }
 
-const { title, isIsland } = Astro.props;
+const { title, isIsland, isPost } = Astro.props;
 ---
 
 <html lang="ko">
@@ -95,15 +97,18 @@ const { title, isIsland } = Astro.props;
     <title>{title}</title>
   </head>
   <body class="dark:bg-gray-900">
+    {isPost ? <ScrollIndicator /> : <></>}
     <Header />
     <Main isIsland={isIsland}>
       <slot />
     </Main>
     <script
+      is:inline
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
     ></script>
     <script
+      is:inline
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
