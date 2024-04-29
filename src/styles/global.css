@@ -23,17 +23,21 @@
     font-size: 48px;
     color: rgb(4, 8, 13);
   }
+  ion-icon.share-outline {
+    font-size: 24px;
+    color: rgb(4, 8, 13);
+  }
   @media (prefers-color-scheme: dark) {
     ion-icon.github {
-      font-size: 30px;
       color: white;
     }
     ion-icon.time {
-      font-size: 14px;
       color: white;
     }
     ion-icon.alert-circle-outline {
-      font-size: 48px;
+      color: white;
+    }
+    ion-icon.share-outline {
       color: white;
     }
   }
