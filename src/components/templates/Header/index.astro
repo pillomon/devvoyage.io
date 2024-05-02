@@ -10,9 +10,9 @@ const { cn } = FormatLib;
 ---
 
 <header
-  class="sticky left-0 top-0 flex flex-col w-full dark:bg-gray-900"
+class={cn(type === 'post' ? 'sticky left-0 top-0 flex flex-col' : '' ,"w-full dark:bg-gray-900 bg-white")}
 >
-  <div class="mx-auto max-w-[992px] flex h-[60px] items-center justify-between w-full">
+  <div class="mx-auto max-w-[992px] flex h-[60px] items-center justify-between px-[30px] w-full">
   <a href="/"
     ><span class="text-2xl font-bold dark:text-white"
       >de<strong class="text-prime">vv</strong>oyage</span

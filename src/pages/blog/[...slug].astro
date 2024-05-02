@@ -31,11 +31,13 @@ const pageTitle = `${entry.data.title} | Blog`;
   <Prose>
     <Content />
   </Prose>
-  <a
-    href=`https://github.com/pillomon/devvoyage.io/tree/main/src/content/blog/${entry.slug}.md`
-    target="_blank"
-    rel="noopenner noreferer"
-    class="mt-[50px] inline-block text-2xl transition-colors hover:text-prime dark:text-white"
-    >Github에서 편집 📃</a
-  >
+  <div class="mt-[50px] flex w-fit items-center gap-1">
+    <a
+      href=`https://github.com/pillomon/devvoyage.io/tree/main/src/content/blog/${entry.slug}.md`
+      target="_blank"
+      rel="noopenner noreferer"
+      class="inline-block text-2xl dark:text-white">Edit on Github</a
+    >
+    <ion-icon name="open-outline" class="open-outline"></ion-icon>
+  </div>
 </Layout>
