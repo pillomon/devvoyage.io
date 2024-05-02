@@ -2,17 +2,16 @@
 import FormatLib from '@/libs/formatLib';
 
 interface Props {
-  isIsland?: boolean;
+  type?: 'island' | 'post';
 }
 
-const { isIsland } = Astro.props;
+const { type } = Astro.props;
 const { cn } = FormatLib;
-console.log(isIsland);
 ---
 
 <main
   class={cn(
-    !!isIsland ? 'island-layout' : 'common-layout',
+    type === 'island' ? 'w-full p-[30px]' : 'max-w-[992px] p-[30px]',
     'mx-auto mt-10 w-full"',
   )}
 >

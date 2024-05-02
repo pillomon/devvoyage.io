@@ -1,12 +1,18 @@
 ---
 import FormatLib from '@/libs/formatLib';
 
+interface Props {
+  type?: 'island' | 'post';
+}
+
+const { type } = Astro.props;
 const { cn } = FormatLib;
 ---
 
 <header
-  class="common-layout mx-auto flex h-[60px] w-full items-center justify-between"
+  class="sticky left-0 top-0 flex flex-col w-full dark:bg-gray-900"
 >
+  <div class="mx-auto max-w-[992px] flex h-[60px] items-center justify-between w-full">
   <a href="/"
     ><span class="text-2xl font-bold dark:text-white"
       >de<strong class="text-prime">vv</strong>oyage</span
@@ -34,4 +40,27 @@ const { cn } = FormatLib;
       </a>
     </li>
   </ul>
+  </div>
+  {type === 'post' ? (
+    <div class="h-[5px] w-full bg-transparent">
+      <div id="scroll-indicator" class="h-full w-0 bg-prime transition-all" />
+    </div>
+  ) : <></>}
 </header>
+
+<script>
+  window.onscroll = function () {
+    myFunction();
+  };
+
+  const myFunction = () => {
+    const winScroll =
+      document.body.scrollTop || document.documentElement.scrollTop;
+    const height =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const ScrollIndicatorEl = document.getElementById('scroll-indicator');
+    if (ScrollIndicatorEl) ScrollIndicatorEl.style.width = scrolled + '%';
+  };
+</script>
