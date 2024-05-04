@@ -4,14 +4,30 @@ import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import rehypeExternalLinks from 'rehype-external-links';
 
+import sitemap from '@astrojs/sitemap';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://devvoyage.io',
-  integrations: [tailwind(), react({ include: ['**/react/*'] })],
+  integrations: [
+    sitemap(),
+    tailwind(),
+    react({
+      include: ['**/react/*'],
+    }),
+  ],
   markdown: {
     remarkPlugins: [remarkReadingTime],
     rehypePlugins: [
-      [rehypeExternalLinks, { content: { type: 'text', value: ' 🔗' } }],
+      [
+        rehypeExternalLinks,
+        {
+          content: {
+            type: 'text',
+            value: ' 🔗',
+          },
+        },
+      ],
     ],
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
@@ -19,7 +35,10 @@ export default defineConfig({
       // theme: "dracula",
       // Alternatively, provide multiple themes
       // https://shiki.style/guide/dual-themes
-      themes: { light: 'dracula', dark: 'dracula' },
+      themes: {
+        light: 'dracula',
+        dark: 'dracula',
+      },
       cssVariablePrefix: '--shiki-',
       // Add custom languages
       // Note: Shiki has countless langs built-in, including .astro!
