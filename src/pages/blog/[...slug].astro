@@ -31,13 +31,14 @@ const pageTitle = `${entry.data.title} | Blog`;
   <Prose>
     <Content />
   </Prose>
-  <div class="mt-[50px] flex w-fit items-center gap-1">
+  <div class="mt-[50px]">
     <a
       href=`https://github.com/pillomon/devvoyage.io/tree/main/src/content/blog/${entry.slug}.md`
       target="_blank"
       rel="noopenner noreferer"
-      class="inline-block text-2xl dark:text-white">Edit on Github</a
+      class="flex w-fit items-center gap-1 text-2xl dark:text-white"
+      >Edit on Github
+      <ion-icon name="open-outline" class="open-outline"></ion-icon></a
     >
-    <ion-icon name="open-outline" class="open-outline"></ion-icon>
   </div>
 </Layout>

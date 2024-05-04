@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --prime-color: #ffbe98;
+  --primary-color: #ffbe98;
 }
 
 @layer base {
@@ -62,7 +62,10 @@
   }
   .highlighter-animation:hover {
     background-size: 100% 100%;
-    background-image: linear-gradient(transparent 70%, var(--prime-color) 30%);
+    background-image: linear-gradient(
+      transparent 70%,
+      var(--primary-color) 30%
+    );
   }
 }
 @layer utilities {

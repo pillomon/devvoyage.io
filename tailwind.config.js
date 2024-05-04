@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 const calcLineHeight = (fontSize) => fontSize * 1.5;
-const primeColor = '#FFBE98';
+const primaryColor = '#FFBE98';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -15,7 +15,7 @@ export default {
     },
     extend: {
       colors: {
-        prime: primeColor,
+        primary: primaryColor,
       },
       fontFamily: {
         sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
@@ -35,7 +35,7 @@ export default {
             a: {
               color: '#FFFFFF',
               '&:hover': {
-                color: primeColor,
+                color: primaryColor,
               },
               textDecoration: 'none',
             },
