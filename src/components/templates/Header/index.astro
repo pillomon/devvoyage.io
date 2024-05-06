@@ -10,42 +10,52 @@ const { cn } = FormatLib;
 ---
 
 <header
-class={cn(type === 'post' ? 'sticky left-0 top-0 flex flex-col' : '' ,"w-full dark:bg-gray-800 bg-white")}
+  class={cn(
+    type === 'post' ? 'sticky left-0 top-0 flex flex-col' : '',
+    'w-full dark:bg-gray-800 bg-white',
+  )}
 >
-  <div class="mx-auto max-w-[992px] flex h-[60px] items-center justify-between px-[30px] w-full">
-  <a href="/"
-    ><span class="text-2xl font-bold dark:text-white"
-      >de<strong class="text-primary">vv</strong>oyage</span
-    ></a
+  <div
+    class="mx-auto flex h-[60px] w-full max-w-[992px] items-center justify-between px-[30px]"
   >
-  <ul class="flex items-center gap-2">
-    <li class="flex">
-      <a
-        href="https://github.com/pillomon"
-        target="_blank"
-        rel="noreferrer noopener"
-        class="flex"
-      >
-        <ion-icon class="github" name="logo-github"></ion-icon>
-      </a>
-    </li>
-    <li class="flex">
-      <a
-        href="https://www.linkedin.com/in/pillsang-sung-b4aba417a/"
-        target="_blank"
-        rel="noreferrer noopener"
-        class="flex"
-      >
-        <ion-icon class="linkedin" name="logo-linkedin"></ion-icon>
-      </a>
-    </li>
-  </ul>
+    <a href="/"
+      ><span class="text-2xl font-bold dark:text-white"
+        >de<strong class="text-primary">vv</strong>oyage</span
+      ></a
+    >
+    <ul class="flex items-center gap-2">
+      <li class="flex">
+        <a
+          href="https://github.com/pillomon"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="flex"
+        >
+          <ion-icon class="github" name="logo-github"></ion-icon>
+        </a>
+      </li>
+      <li class="flex">
+        <a
+          href="https://www.linkedin.com/in/pillsang-sung-b4aba417a/"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="flex"
+        >
+          <ion-icon class="linkedin" name="logo-linkedin"></ion-icon>
+        </a>
+      </li>
+    </ul>
   </div>
-  {type === 'post' ? (
-    <div class="h-[5px] w-full bg-transparent">
-      <div id="scroll-indicator" class="h-full w-0 bg-primary transition-all" />
-    </div>
-  ) : <></>}
+  {
+    type === 'post' ? (
+      <div class="h-[5px] w-full bg-transparent">
+        <div
+          id="scroll-indicator"
+          class="h-full w-0 bg-primary transition-all"
+        />
+      </div>
+    ) : undefined
+  }
 </header>
 
 <script>

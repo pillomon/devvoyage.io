@@ -1,8 +1,12 @@
 ---
 import Layout from '@/components/templates/Layout/index.astro';
 import ReactHookFormsWithZodIsland from '@/islands/ReactHookFormWithZod';
+
+const pageTitle = `React Hook Forms With Zod | Laboratory`;
+const pageDescription =
+  'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.';
 ---
 
-<Layout title="Laboratory" type="island">
+<Layout title={pageTitle} description={pageDescription} type="island">
   <ReactHookFormsWithZodIsland client:load />
 </Layout>

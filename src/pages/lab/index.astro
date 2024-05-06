@@ -2,13 +2,13 @@
 import Layout from '@/components/templates/Layout/index.astro';
 
 const pageTitle = 'Laboratory';
-
+const pageDescription = `It is a laboratory that freely tests the UI.`;
 const LabRoute = {
   REACT_HOOK_FOMR_WITH_ZOD: 'react-hook-form-with-zod',
 };
 ---
 
-<Layout title={pageTitle}>
+<Layout title={pageTitle} description={pageDescription}>
   <h1 class="text-6xl font-bold dark:text-white">Lab</h1>
   <section class="mt-20 flex flex-col items-start justify-start gap-10">
     <h2>
