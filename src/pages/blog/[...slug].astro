@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await entry.render();
-const pageTitle = `${entry.data.title} | Blog`;
+const pageTitle = `${entry.data.title}`;
 const pageDescription = `${entry.data.topic}`;
 ---
 
