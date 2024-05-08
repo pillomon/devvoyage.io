@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import LitSVG from '#/images/frameworks/lit.svg';
+
+interface Props {
+  route: string;
+  title: string;
+  topic: string;
+}
+
+const { route, title, topic } = Astro.props;
+---
+
+<article
+  class="group w-[224px] cursor-pointer rounded-md border-[1px] border-solid border-black bg-white p-[30px] transition-all medium:hover:scale-105"
+>
+  <a href={`/lab/${route}`} class="flex w-full flex-col gap-[10px]">
+    <div class="h-[30px] w-[30px] bg-black">
+      <Image
+        src={LitSVG.src}
+        alt="UI framework icon."
+        inferSize
+        class="h-full w-full object-cover"
+      />
+    </div>
+    <h2 class="text-md line-clamp-2 font-semibold group-hover:text-primary">
+      {title}
+    </h2>
+    <p class="line-clamp-3">{topic}</p>
+  </a>
+</article>

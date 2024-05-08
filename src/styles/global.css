@@ -11,40 +11,6 @@
     padding-left: env(safe-area-inset-left, 0px);
     padding-right: env(safe-area-inset-right, 0px);
   }
-  ion-icon.github {
-    font-size: 30px;
-    color: rgb(4, 8, 13);
-  }
-  ion-icon.linkedin {
-    font-size: 30px;
-    color: rgb(13, 91, 186);
-  }
-  ion-icon.time {
-    font-size: 12px;
-    color: rgb(4, 8, 13);
-  }
-  ion-icon.alert-circle-outline {
-    font-size: 48px;
-    color: rgb(4, 8, 13);
-  }
-  ion-icon.share-outline {
-    font-size: 24px;
-    color: rgb(4, 8, 13);
-  }
-  @media (prefers-color-scheme: dark) {
-    ion-icon.github {
-      color: white;
-    }
-    ion-icon.time {
-      color: white;
-    }
-    ion-icon.alert-circle-outline {
-      color: white;
-    }
-    ion-icon.share-outline {
-      color: white;
-    }
-  }
 }
 @layer components {
   .highlighter-animation {

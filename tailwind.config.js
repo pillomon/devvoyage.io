@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 const calcLineHeight = (fontSize) => fontSize * 1.5;
 const primaryColor = '#FFBE98';
+const secondaryColor = '#04080D';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -16,6 +17,7 @@ export default {
     extend: {
       colors: {
         primary: primaryColor,
+        secondary: secondaryColor,
       },
       fontFamily: {
         sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],

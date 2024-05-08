@@ -1,22 +1,31 @@
 ---
 import Layout from '@/components/templates/Layout/index.astro';
+import Card from '@/components/card/Lab/index.astro';
 
 const pageTitle = 'Laboratory';
 const pageDescription = `It is a laboratory that freely tests the UI.`;
-const LabRoute = {
-  REACT_HOOK_FOMR_WITH_ZOD: 'react-hook-form-with-zod',
-};
+const labArticles = [
+  {
+    route: 'react-hook-form-with-zod',
+    title: 'React hook form with zod',
+    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+];
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
   <h1 class="text-6xl font-bold dark:text-white">Lab</h1>
-  <section class="mt-20 flex flex-col items-start justify-start gap-10">
-    <h2>
-      <a
-        href={`/lab/${LabRoute.REACT_HOOK_FOMR_WITH_ZOD}`}
-        class="text-xl font-semibold transition-all hover:text-[#50C878] medium:text-2xl extra:text-3xl dark:text-white"
-        >React Hook Form with Zod</a
-      >
-    </h2>
+  <section class="mt-20 flex flex-wrap items-start justify-start gap-[32px]">
+    {
+      labArticles.map((article) => {
+        return (
+          <Card
+            route={article.route}
+            title={article.title}
+            topic={article.topic}
+          />
+        );
+      })
+    }
   </section>
 </Layout>
