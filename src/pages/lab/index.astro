@@ -1,25 +1,67 @@
 ---
 import Layout from '@/components/templates/Layout/index.astro';
-import Card from '@/components/card/Lab/index.astro';
+import Card, { type Props } from '@/components/card/Lab/index.astro';
 
 const pageTitle = 'Laboratory';
 const pageDescription = `It is a laboratory that freely tests the UI.`;
-const labArticles = [
+const labArticles: Props[] = [
   {
+    framework: 'react',
     route: 'react-hook-form-with-zod',
     title: 'React hook form with zod',
     topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+  {
+    framework: 'svelte',
+    route: 'react-hook-form-with-zod',
+    title: 'React hook form with zod',
+    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+  {
+    framework: 'preact',
+    route: 'react-hook-form-with-zod',
+    title: 'React hook form with zod',
+    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+  {
+    framework: 'alpine-js',
+    route: 'react-hook-form-with-zod',
+    title: 'React hook form with zod',
+    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+  {
+    framework: 'lit',
+    route: 'react-hook-form-with-zod',
+    title: 'React hook form with zod',
+    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+  {
+    framework: 'solid',
+    route: 'react-hook-form-with-zod',
+    title: 'React hook form with zod',
+    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
+  },
+  {
+    framework: 'vue',
+    route: 'react-hook-form-with-zodreact-hook-form-with-zod',
+    title:
+      'React hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zodReact hook form with zod',
+    topic:
+      'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
   },
 ];
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
   <h1 class="text-6xl font-bold dark:text-white">Lab</h1>
-  <section class="mt-20 flex flex-wrap items-start justify-start gap-[32px]">
+  <section
+    class="mt-20 flex flex-wrap justify-center gap-[28px] medium:items-start medium:justify-start"
+  >
     {
       labArticles.map((article) => {
         return (
           <Card
+            framework={article.framework}
             route={article.route}
             title={article.title}
             topic={article.topic}
