@@ -1,17 +1,10 @@
 ---
 import Layout from '@/components/templates/Layout/index.astro';
 import Card, { type Props } from '@/components/card/Lab/index.astro';
+import { islands } from '@/islands';
 
 const pageTitle = 'Laboratory';
 const pageDescription = `It is a laboratory that freely tests the UI.`;
-const labArticles: Props[] = [
-  {
-    framework: 'react',
-    route: 'react-hook-form-with-zod',
-    title: 'React hook form with zod',
-    topic: 'React Hook Forms & Zod 라이브러리로 만든 Form UI입니다.',
-  },
-];
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -20,13 +13,14 @@ const labArticles: Props[] = [
     class="mt-20 flex flex-wrap justify-center gap-[28px] medium:items-start medium:justify-start"
   >
     {
-      labArticles.map((article) => {
+      islands.map((island) => {
         return (
           <Card
-            framework={article.framework}
-            route={article.route}
-            title={article.title}
-            topic={article.topic}
+            id={island.id}
+            framework={island.framework}
+            slug={island.route}
+            title={island.title}
+            topic={island.topic}
           />
         );
       })
