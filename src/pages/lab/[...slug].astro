@@ -5,21 +5,21 @@ import { islands } from '@/islands';
 import ReactHookFormsWithZodIsland from '@/islands/react-hook-form-with-zod';
 
 export const getStaticPaths = (() => {
-  return islands.map(({ id, framework, slug, title, topic }) => {
+  return islands.map(({ id, framework, slug, title, topic, component }) => {
     return {
       params: { slug },
-      props: { id, framework, title, topic },
+      props: { id, framework, title, topic, component },
     };
   });
 }) satisfies GetStaticPaths;
 
 const { slug } = Astro.params;
-const { id, framework, title, topic } = Astro.props;
+const { id, title, topic, component: Component } = Astro.props;
 
 const pageTitle = title;
 const pageDescription = topic;
 ---
 
 <Layout title={pageTitle} description={pageDescription} type="island">
-  <ReactHookFormsWithZodIsland client:load />
+  <Component />
 </Layout>

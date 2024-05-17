@@ -10,13 +10,13 @@ export interface Props {
   topic: string;
 }
 
-const { id, framework, title, topic } = Astro.props;
+const { id, framework, slug, title, topic } = Astro.props;
 ---
 
 <article
   class="group h-[270px] w-full cursor-pointer rounded-md bg-gray-100 p-[30px] shadow-xl transition-all large:h-[300px] large:w-[292px] large:hover:scale-105"
 >
-  <a href={`/lab/${id}`} class="flex h-full w-full flex-col justify-between">
+  <a href={`/lab/${slug}`} class="flex h-full w-full flex-col justify-between">
     <div class="flex flex-col gap-[10px]">
       <div
         class="flex h-[64px] w-[64px] items-center justify-center rounded-[50%] bg-gray-700"
