@@ -1,8 +1,7 @@
-import type { Framework } from './types';
-import ReactHookFormsWithZodIsland from './react-hook-form-with-zod';
+import type { Framework } from '@/islands/types';
+import ReactHookFormsWithZodIsland from '@/islands/react-hook-form-with-zod';
 
 interface Island {
-  id: number;
   framework: Framework;
   slug: string;
   title: string;
@@ -12,7 +11,6 @@ interface Island {
 
 export const islands: Island[] = [
   {
-    id: 1,
     framework: 'react',
     slug: 'react-hook-form-with-zod',
     title: 'React hook form with Zod',

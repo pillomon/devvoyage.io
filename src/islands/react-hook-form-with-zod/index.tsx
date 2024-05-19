@@ -96,7 +96,7 @@ function ReactHookFormsWithZodIsland() {
 
   return (
     <div className="mx-auto flex w-full max-w-[768px] flex-col items-center gap-[50px] rounded-md bg-gray-200 p-[20px]">
-      <h1 className="text-4xl font-bold">Sign Up</h1>
+      <span className="text-4xl font-bold">Sign Up</span>
       <form
         id="signUpForm"
         onSubmit={handleSubmit(onSubmit)}

@@ -3,14 +3,13 @@ import { Image } from 'astro:assets';
 import type { Framework } from '@/islands/types';
 
 export interface Props {
-  id: number;
   framework: Framework;
   slug: string;
   title: string;
   topic: string;
 }
 
-const { id, framework, slug, title, topic } = Astro.props;
+const { framework, slug, title, topic } = Astro.props;
 ---
 
 <article
