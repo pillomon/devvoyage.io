@@ -13,7 +13,7 @@ const pageDescription = `It is a laboratory that freely tests the UI.`;
     class="mt-20 flex flex-wrap justify-center gap-[28px] medium:items-start medium:justify-start"
   >
     {
-      islands.map((island) => {
+      islands.reverse().map((island) => {
         return (
           <Card
             framework={island.framework}
