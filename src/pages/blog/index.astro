@@ -14,7 +14,7 @@ const isDev = import.meta.env.DEV;
   <h1 class="text-6xl font-bold dark:text-white">Blog</h1>
   <section class="mt-20 flex flex-col items-start justify-start gap-10">
     {
-      blogEntries.map((post) => {
+      blogEntries.reverse().map((post) => {
         if ((!post.data.isDraft && isProd) || isDev)
           return (
             <Card
