@@ -1,5 +1,5 @@
 ---
-import Layout from '@/components/templates/Layout/index.astro';
+import Layout from '@/components/Templates/Layout/index.astro';
 import Prose from '@/components/Prose/index.astro';
 import { getCollection } from 'astro:content';
 
@@ -25,7 +25,7 @@ const pageDescription = `${entry.data.topic}`;
     <p class="flex w-full items-center gap-1">
       <ion-icon
         name="time-outline"
-        class="text-secondary text-[12px] dark:text-white"></ion-icon>
+        class="text-[12px] text-secondary dark:text-white"></ion-icon>
       <span class="text-sm dark:text-white"
         >{remarkPluginFrontmatter.minutesRead}</span
       >

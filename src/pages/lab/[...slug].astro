@@ -1,8 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import Layout from '@/components/templates/Layout/index.astro';
+import Layout from '@/components/Templates/Layout/index.astro';
 import { islands } from '@/islands';
-import ReactHookFormsWithZodIsland from '@/islands/react-hook-form-with-zod';
 
 export const getStaticPaths = (() => {
   return islands.map(({ framework, slug, title, topic, component }) => {
