@@ -1,17 +1,13 @@
 ---
 import FormatLib from '@/libs/formatLib';
 
-interface Props {
-  type?: 'island' | 'post';
-}
-
-const { type } = Astro.props;
+const { pathname } = Astro.url;
 const { cn } = FormatLib;
 ---
 
 <header
   class={cn(
-    type === 'post' ? 'sticky left-0 top-0 flex flex-col' : '',
+    pathname === '/blog' ? 'sticky left-0 top-0 flex flex-col' : '',
     'w-full dark:bg-gray-800 bg-white',
   )}
 >
@@ -33,7 +29,7 @@ const { cn } = FormatLib;
         >
           <ion-icon
             name="logo-github"
-            class="text-secondary text-[26px] medium:text-[30px] dark:text-white"
+            class="text-[26px] text-secondary medium:text-[30px] dark:text-white"
           ></ion-icon>
         </a>
       </li>
@@ -53,7 +49,7 @@ const { cn } = FormatLib;
     </ul>
   </div>
   {
-    type === 'post' ? (
+    pathname === '/blog' ? (
       <div class="h-[5px] w-full bg-transparent">
         <div
           id="scroll-indicator"

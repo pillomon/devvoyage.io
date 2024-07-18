@@ -7,10 +7,9 @@ import '@/styles/global.css';
 interface Props {
   title: string;
   description: string;
-  type?: 'island' | 'post';
 }
 
-const { title, description, type } = Astro.props;
+const { title, description } = Astro.props;
 ---
 
 <html lang="ko">
@@ -119,10 +118,11 @@ const { title, description, type } = Astro.props;
     <meta name="twitter:card" content="summary" />
   </head>
   <body class="flex min-h-screen w-full flex-col dark:bg-gray-800">
-    <Header type={type} />
-    <Main type={type}>
+    <Header />
+    <Main>
       <slot />
     </Main>
+    <Footer />
     <script
       is:inline
       type="module"
@@ -133,5 +133,4 @@ const { title, description, type } = Astro.props;
       nomodule
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   </body>
-  <Footer />
 </html>

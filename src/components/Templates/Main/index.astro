@@ -1,17 +1,15 @@
 ---
 import FormatLib from '@/libs/formatLib';
 
-interface Props {
-  type?: 'island' | 'post';
-}
-
-const { type } = Astro.props;
+const { pathname } = Astro.url;
 const { cn } = FormatLib;
+const paths = pathname.split('/');
+const isLabPost = !!(paths[1] === 'lab' && paths[2]);
 ---
 
 <main
   class={cn(
-    type === 'island' ? 'w-full' : 'max-w-[992px] px-[30px]',
+    isLabPost ? 'w-full' : 'max-w-[992px] px-[30px]',
     'mx-auto mt-10 w-full flex-1',
   )}
 >
