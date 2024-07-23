@@ -3,6 +3,7 @@ import Layout from '@/components/Templates/Layout/index.astro';
 import Prose from '@/components/Prose/index.astro';
 import { getCollection } from 'astro:content';
 
+export const prerender = true;
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
   return blogEntries.map((entry) => ({

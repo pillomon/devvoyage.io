@@ -1,0 +1,28 @@
+---
+import Layout from '@/components/Templates/Layout/index.astro';
+import Card, { type Props } from '@/components/Card/Lab/index.astro';
+import { islands } from '@/islands';
+
+const pageTitle = 'Laboratory';
+const pageDescription = `It is a laboratory that freely tests the UI.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <h1 class="text-6xl font-bold dark:text-white">Lab</h1>
+  <section
+    class="mt-20 flex flex-wrap justify-center gap-[28px] medium:items-start medium:justify-start"
+  >
+    {
+      islands.reverse().map((island) => {
+        return (
+          <Card
+            framework={island.framework}
+            slug={island.slug}
+            title={island.title}
+            topic={island.topic}
+          />
+        );
+      })
+    }
+  </section>
+</Layout>

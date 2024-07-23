@@ -3,6 +3,8 @@ import FormatLib from '@/libs/formatLib';
 
 const { pathname } = Astro.url;
 const { cn } = FormatLib;
+const paths = pathname.split('/');
+const isBlogPost = !!(paths[1] === 'blog' && paths[2]);
 ---
 
 <header
@@ -49,7 +51,7 @@ const { cn } = FormatLib;
     </ul>
   </div>
   {
-    pathname === '/blog' ? (
+    isBlogPost ? (
       <div class="h-[5px] w-full bg-transparent">
         <div
           id="scroll-indicator"
