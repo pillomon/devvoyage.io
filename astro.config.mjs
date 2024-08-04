@@ -4,12 +4,9 @@ import { defineConfig } from 'astro/config';
 import { remarkReadingTime } from './remark-reading-time.mjs';
 import rehypeExternalLinks from 'rehype-external-links';
 import sitemap from '@astrojs/sitemap';
-import vercel from '@astrojs/vercel/static';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
-  adapter: vercel(),
   site: 'https://devvoyage.io',
   integrations: [
     sitemap(),
