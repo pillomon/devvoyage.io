@@ -8,8 +8,6 @@ import vercel from '@astrojs/vercel/serverless';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server',
-  adapter: vercel(),
   site: 'https://devvoyage.io',
   integrations: [
     sitemap(),
@@ -53,4 +51,6 @@ export default defineConfig({
       transformers: [],
     },
   },
+  output: 'server',
+  adapter: vercel(),
 });
