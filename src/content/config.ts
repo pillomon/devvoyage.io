@@ -15,6 +15,7 @@ const blogCollection = defineCollection({
     createdDate: z.date(),
     modifiedDate: z.date().optional(),
     topic: z.string(),
+    bilingual: z.boolean(),
   }),
 });
 export const collections = {
