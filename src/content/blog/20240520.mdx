@@ -10,6 +10,15 @@ topic: Docker를 이용하여 Next.js 이미지를 생성하는 방법을 공유
 bilingual: false
 ---
 
+import Code from '@/components/Code/index.astro';
+import {
+  SAMPLE_1,
+  SAMPLE_2,
+  SAMPLE_3,
+  SAMPLE_4,
+  SAMPLE_5,
+} from '@/constants/content/blog/20240520.ts';
+
 ## TL;DR
 
 비단 프론트엔드 뿐만이 아니더라도 development, staging, live(production) 환경이 달라 문제를 겪었던 경험은 개발자라면 한 번쯤은 있을 거라고 생각합니다. 이런 문제를 해결할 방법 중 Docker를 사용해 Next.js 이미지를 생성하고 Docker 컨테이너를 실행하는 방법에 대해 다뤄보려 합니다. Vercel에서 제공하는 Next.js의 Dockerfile 샘플을 가지고 설명을하겠습니다.
@@ -27,10 +36,7 @@ bilingual: false
 
 ## Base stage
 
-```Dockerfile
-FROM node:18-alpine AS base
-RUN corepack enable
-```
+<Code code={SAMPLE_1} lang="dockerfile" />
 
 node:18-alpine는 기본 이미지로서 [Docker Hub](https://hub.docker.com)를 통해 본인에게 더 적합한 기본 이미지를 찾을 수 있습니다. 위 이미지는 nodejs 18버전을 사용합니다. alpine은 linux를 경량화하여 배포한 이미지로 보안에 특화되었고 불필요한 package와 daemon이 없으며 패키지 관리자로 apk를 사용합니다.
 
@@ -38,22 +44,7 @@ node:18-alpine는 기본 이미지로서 [Docker Hub](https://hub.docker.com)를
 
 ## Deps stage
 
-```Dockerfile
-# Install dependencies only when needed
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
-
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-```
+<Code code={SAMPLE_2} lang="dockerfile" />
 
 deps stage로 base 이미지를 그대로 가져와 사용합니다.
 
@@ -63,34 +54,11 @@ WORKDIR 명령어로 /app 디렉터리를 작업 디렉터리로 설정해 준 �
 
 또한 저는 sharp(이미지 최적화 패키지)를 linux 플랫폼과 호환되게 해당 stage에서 pnpm add를 통해 설치하였습니다.
 
-```Dockerfile
-RUN \
-  if [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile && pnpm add sharp; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-```
+<Code code={SAMPLE_3} lang="dockerfile" />
 
 ## Builder stage
 
-```Dockerfile
-# Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during the build.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN \
-  if [ -f yarn.lock ]; then yarn run build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm run build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-```
+<Code code={SAMPLE_4} lang="dockerfile" />
 
 builder stage로 deps와 동일하게 base 이미지를 그대로 가져와 사용합니다.
 
@@ -102,38 +70,7 @@ COPY를 완료한 뒤 RUN 명령어를 사용해 Next.js 프로젝트 build를 �
 
 ## Runner stage
 
-```Dockerfile
-# Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV production
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-# Set the correct permission for prerender cache
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
-# Automatically leverage output traces to reduce image size
-# https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
-EXPOSE 3000
-
-ENV PORT 3000
-
-# server.js is created by next build from the standalone output
-# https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
-```
+<Code code={SAMPLE_5} lang="dockerfile" />
 
 runner stage는 매우 간단합니다. 기존 stage에서 생성된 데이터 중 필요한 데이터를 가져와 서비스를 실행시키는 역할을 하고 있습니다.
 base 이미지를 그대로 가져오고 /app을 작업 디렉터리로 지정합니다. production 값을 가진 NODE_ENV라는 환경변수를 생성합니다.
@@ -150,4 +87,4 @@ base 이미지를 그대로 가져오고 /app을 작업 디렉터리로 지정�
 
 ## Conclusion
 
-Vercel에서 제공하는 기본 Dockerfile을 의미를 해석해보았는데, 이글을 보고 도움이 되었으면 좋겠습니다. 저의 경우 현업에서 별도로 서버구성 담당이 없기에 제가 직접 Docker환경을 구축하였으며, 위의 Dockerfile을 base로 sharp를 다운로드하는 로직 추가 또는 pm2 설정을 통한 무중단 서비스 제공 등 저희 프로젝트에 맞게 더 나아가 소프트웨어 운영에 도움이 되는 방향으로 수정하여 사용중입니다.!
+Vercel에서 제공하는 기본 Dockerfile을 의미를 해석해보았는데, 이글을 보고 도움이 되었으면 좋겠습니다. 저의 경우 현업에서 별도로 서버구성 담당이 없기에 제가 직접 Docker환경을 구축하였으며, 위의 Dockerfile을 base로 sharp를 다운로드하는 로직 추가 또는 pm2 설정을 통한 무중단 서비스 제공 등 저희 프로젝트에 맞게 더 나아가 소프트웨어 운영에 도움이 되는 방향으로 수정하여 사용중입니다.!import { SAMPLE_2 } from '../../constants/content/blog/20240520';import { SAMPLE_3 } from '../../constants/content/blog/20240520';
