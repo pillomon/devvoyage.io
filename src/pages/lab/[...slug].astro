@@ -3,17 +3,24 @@ import type { GetStaticPaths } from 'astro';
 import Layout from '@/components/Templates/Layout/index.astro';
 import { islands } from '@/islands';
 
-export const getStaticPaths = (() => {
-  return islands.map(({ framework, slug, title, topic, component }) => {
+export async function getStaticPaths() {
+  return islands.map((island) => {
     return {
-      params: { slug },
-      props: { framework, title, topic, component },
+      params: { slug: island.slug },
+      props: {
+        title: island.title,
+        topic: island.topic,
+        component: island.component,
+      },
     };
   });
-}) satisfies GetStaticPaths;
+}
 
 const { slug } = Astro.params;
 const { title, topic, component: Component } = Astro.props;
+console.log(islands);
+console.log({ title, topic, Component });
+console.log(`11`, typeof Component);
 
 const pageTitle = title;
 const pageDescription = topic;

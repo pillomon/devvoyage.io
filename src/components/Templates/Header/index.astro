@@ -1,35 +1,12 @@
 ---
 import FormatLib from '@/libs/formatLib';
+import ReadProgressBar from '@/components/ReadProgressBar/index.astro';
 
 const { pathname } = Astro.url;
 const { cn } = FormatLib;
 const paths = pathname.split('/');
 const isBlogPost = !!(paths[1] === 'blog' && paths[2]);
 ---
-
-<script>
-  import EventLib from '@/libs/eventLib';
-
-  const updateScrollIndicator = () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
-    const height =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    const ScrollIndicatorEl = document.getElementById('scroll-indicator');
-    if (ScrollIndicatorEl) ScrollIndicatorEl.style.width = scrolled + '%';
-  };
-
-  const throttledUpdateScrollIndicator = EventLib.throttle(
-    updateScrollIndicator,
-    75,
-  );
-
-  window.onscroll = function () {
-    throttledUpdateScrollIndicator();
-  };
-</script>
 
 <header
   class={cn(
@@ -74,14 +51,5 @@ const isBlogPost = !!(paths[1] === 'blog' && paths[2]);
       </li>
     </ul>
   </div>
-  {
-    isBlogPost ? (
-      <div class="h-[5px] w-full bg-transparent">
-        <div
-          id="scroll-indicator"
-          class="h-full w-0 bg-primary transition-all"
-        />
-      </div>
-    ) : undefined
-  }
+  <ReadProgressBar isVisible={isBlogPost} />
 </header>

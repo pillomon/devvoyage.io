@@ -1,0 +1,53 @@
+---
+import { Code } from 'astro:components';
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof Code>;
+
+const { code, lang } = Astro.props;
+---
+
+<script>
+  class CopyCode extends HTMLElement {
+    constructor() {
+      super();
+
+      const code = this.dataset.code;
+      const copyEl = this.querySelector('div') as HTMLElement | null;
+
+      copyEl?.addEventListener('click', () => {
+        if (!code) return;
+
+        navigator.clipboard.writeText(code).catch((err) => {
+          console.error('Failed to copy to clipboard:', err);
+        });
+      });
+    }
+  }
+
+  customElements.define('copy-code', CopyCode);
+</script>
+
+<div class="relative flex w-full">
+  <div
+    class="absolute top-0 flex h-12 w-full items-center justify-between border-b-[1px] border-solid border-b-gray-300 px-4"
+  >
+    <copy-code data-code={code}>
+      <div
+        class="flex items-center justify-center rounded-md px-2 py-1 active:bg-gray-700 active:opacity-80 medium:hover:cursor-pointer medium:hover:bg-gray-700 medium:hover:bg-opacity-40"
+      >
+        <span class="inline-block">COPY</span>
+      </div>
+    </copy-code>
+    <span class="inline-block text-gray-400"
+      >{lang?.toString().toLocaleUpperCase()}</span
+    >
+  </div>
+  <Code
+    code={code}
+    lang={lang}
+    theme="material-theme-darker"
+    wrap={true}
+    class="!m-0 w-full !pt-14"
+  />
+</div>

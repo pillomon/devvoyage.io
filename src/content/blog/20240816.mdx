@@ -1,0 +1,39 @@
+---
+isDraft: true
+title: (MY)SQL JOIN 가이드 for Beginer
+tags: [SQL, MySQL, JOIN]
+thumbnail:
+  src: https://images.unsplash.com/photo-1642775196125-38a9eb496568?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+  alt: 썸네일
+createdDate: 2024-08-16
+topic: 테이블 연결의 마법, JOIN! 어떻게 하면 데이터를 제대로 엮을 수 있을까요?
+bilingual: false
+---
+
+import Code from '@/components/Code/index.astro';
+import { TEST_TABLE_DDL } from '@/constants/content/blog/20240816.ts';
+
+## TL;DR
+
+- 사내에서 Ci3 유지보수를 하면서 Controller에서 사용할 데이터를 Model에서 SQL을 직접 작성해서 작업한 경험이 있습니다.
+- 그 때 학습한 JOIN의 정의 및 자주 사용되는 문법 그리고 장점에 대해 다뤄보겠습니다.
+
+## JOIN?
+
+JOIN은 관계형 데이터베이스에서 여러 테이블의 데이터를 결합하는 핵심 기능입니다. 테이블 간 관계는 1:1, 1:N, N:M으로 구분됩니다.
+
+## INNER vs (RIGHT/LEFT) OUTER
+
+이해를 쉽게 돕게하기 위해 가상의 테이블을 정의한 후 해당 데이터를 기준으로 설명하겠습니다.
+
+**_INIT SQL_**
+
+<Code code={TEST_TABLE_DDL} lang="sql" />
+
+### SQL test website
+
+- 다음 사이트에서 SQL 테스트가 가능합니다.
+- 위 SQL을 상단 *INIT database*에 고정 후 하단에 제공되는 예제 SQL을 *QUERY database*에 입력 부탁드립니다.
+- [SQL Fiddle](https://sqlfiddle.com/mysql/online-compiler)
+
+{/_ Foreign key를 실무에서 사용하지 않는 이유 _/}

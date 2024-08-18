@@ -10,6 +10,9 @@ topic: window.open이 왜 null을 return 할까요?
 bilingual: false
 ---
 
+import Code from '@/components/Code/index.astro';
+import { SAMPLE_1, SAMPLE_2 } from '@/constants/content/blog/20240731.ts';
+
 ## TL;DR
 
 window.open() method에 대해 크로스 브라우징을 점검하다 모바일 Safari 환경에서 새 탭이 열리지 않는 이슈를 확인했습니다. 발생 원인과 해결한 경험을 공유드리겠습니다.
@@ -18,13 +21,7 @@ window.open() method에 대해 크로스 브라우징을 점검하다 모바일 
 
 ![flow](/images/blog/20240731/flow.png)
 
-```javascript
-const openLink = (url: string) => {
-  if (typeof window === 'undefined') return;
-
-  window.open(url, '_blank');
-};
-```
+<Code code={SAMPLE_1} lang="javascript" />
 
 구현한 flow와 코드는 위와 같이 되어있으며, 버튼 클릭 후 POST Request의 응답으로 백엔드에서 window.open의 인자로 들어가는 url을 받아오고 있었습니다. 문제는 모바일 Safari에서 버튼을 클릭하면 어떠한 동작도 일어나지 않으며, Return value인 WindowProxy가 아닌 null을 return하는 증상이 확인되었습니다.
 
@@ -44,16 +41,7 @@ const openLink = (url: string) => {
 
 ## 해결 방법
 
-```javascript
-const popup = () => window.open('', '_blank');
-
-if (!popup) return;
-
-const data = await getURL();
-
-if (data.url) popup.location.href = data.landingUrl;
-else popup.close();
-```
+<Code code={SAMPLE_2} lang="javascript" />
 
 해결 방법으로는 일반적인 상황에서는 openLink를 그대로 사용하되 비동기적인 코드를 다루는 부분에서는 위와 같이 사용자 interaction(e.g. click)이 발생했을 때 *window.open('', '\_blank');*를 실행시켜 응답값인 WindowProxy를 변수에 담아두었다가 백엔드에서 url을 받아온 뒤 주입해주는 방식으로 변경했습니다.
 
@@ -62,5 +50,6 @@ else popup.close();
 ## References
 
 [window.open returns null in Safari and Firefox after allowing pop-up on the browser](https://ffan0811.medium.com/window-open-returns-null-in-safari-and-firefox-after-allowing-pop-up-on-the-browser-4e4e45e7d926)
-<br/>
+
+<br />
 [Window: open() method](https://developer.mozilla.org/en-US/docs/Web/API/Window/open)
