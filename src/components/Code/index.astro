@@ -13,14 +13,26 @@ const { code, lang } = Astro.props;
       super();
 
       const code = this.dataset.code;
-      const copyEl = this.querySelector('div') as HTMLElement | null;
+      const copyEl = this.querySelector('#copy-outline') as HTMLElement;
+      const checkEl = this.querySelector('#checkmark-outline') as HTMLElement;
 
-      copyEl?.addEventListener('click', () => {
+      copyEl.addEventListener('click', () => {
         if (!code) return;
 
-        navigator.clipboard.writeText(code).catch((err) => {
-          console.error('Failed to copy to clipboard:', err);
-        });
+        navigator.clipboard
+          .writeText(code)
+          .then(() => {
+            copyEl.style.display = 'none';
+            checkEl.style.display = 'flex';
+
+            setTimeout(() => {
+              copyEl.style.display = 'flex';
+              checkEl.style.display = 'none';
+            }, 1000);
+          })
+          .catch((err) => {
+            console.error('Failed to copy to clipboard:', err);
+          });
       });
     }
   }
@@ -34,9 +46,16 @@ const { code, lang } = Astro.props;
   >
     <copy-code data-code={code}>
       <div
+        id="copy-outline"
         class="flex items-center justify-center rounded-md px-2 py-1 active:bg-gray-700 active:opacity-80 medium:hover:cursor-pointer medium:hover:bg-gray-700 medium:hover:bg-opacity-40"
       >
-        <span class="inline-block">COPY</span>
+        <ion-icon name="copy-outline"></ion-icon>
+      </div>
+      <div
+        id="checkmark-outline"
+        class="hidden items-center justify-center rounded-md px-2 py-1 active:bg-gray-700 active:opacity-80 medium:hover:cursor-pointer medium:hover:bg-gray-700 medium:hover:bg-opacity-40"
+      >
+        <ion-icon name="checkmark-outline"></ion-icon>
       </div>
     </copy-code>
     <span class="inline-block text-gray-400"
