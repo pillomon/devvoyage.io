@@ -1,5 +1,4 @@
-export const TEST_TABLE_DDL = `
-CREATE TABLE Customers (
+export const TEST_TABLE_DDL = `CREATE TABLE Customers (
     c_id INT PRIMARY KEY,
     c_name VARCHAR(100) NOT NULL,
     c_email VARCHAR(100) UNIQUE NOT NULL,
@@ -62,4 +61,43 @@ INSERT INTO OrderDetails (o_d_id, o_id, p_id, quantity, unit_price, discount) VA
     (2, 2, 1, 10, 10000.00, 0.00),
     (3, 2, 2, 10, 20000.00, 0.00),
     (4, 3, 3, 5, 30000.00, 5000.00);
+`;
+export const TEST_INNER_JOIN_QUERY = `SELECT 
+    c.c_name AS customer_name,
+    o.o_id AS order_id,
+    o.o_date AS order_date,
+    p.p_name AS product_name,
+    od.quantity,
+    od.unit_price,
+    od.subtotal,
+    (od.subtotal - od.discount) AS final_price
+FROM 
+    Customers c
+INNER JOIN Orders o ON c.c_id = o.c_id
+INNER JOIN OrderDetails od ON o.o_id = od.o_id
+INNER JOIN Products p ON od.p_id = p.p_id
+WHERE 
+    o.o_date BETWEEN '2024-08-01' AND '2024-08-31'
+    AND p.category = 'Electronics'
+ORDER BY 
+    o.o_date DESC, od.subtotal DESC;
+`;
+export const TEST_LEFT_OUTER_JOIN_QUERY = `SELECT 
+    c.c_name AS customer_name,
+    COALESCE(COUNT(DISTINCT o.o_id), 0) AS total_orders,
+    COALESCE(SUM(od.quantity), 0) AS total_items_purchased,
+    COALESCE(SUM(od.subtotal - od.discount), 0) AS total_spent,
+    MAX(o.o_date) AS last_order_date,
+    GROUP_CONCAT(DISTINCT p.category SEPARATOR ', ') AS purchased_categories
+FROM 
+    Customers c
+LEFT JOIN Orders o ON c.c_id = o.c_id
+LEFT JOIN OrderDetails od ON o.o_id = od.o_id
+LEFT JOIN Products p ON od.p_id = p.p_id
+GROUP BY 
+    c.c_id, c.c_name
+HAVING 
+    COUNT(DISTINCT o.o_id) >= 0
+ORDER BY 
+    total_spent DESC, total_orders DESC;
 `;
