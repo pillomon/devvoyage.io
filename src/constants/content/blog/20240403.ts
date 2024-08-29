@@ -1,5 +1,4 @@
-export const SAMPLE_1 = `
-export interface SignUpFormData {
+export const SAMPLE_1 = `export interface SignUpFormData {
   email: string;
   password: string;
   confirmPassword: string;
@@ -33,8 +32,7 @@ function ReactHookFormsWithZodIsland() {
   });
 }
 `;
-export const SAMPLE_2 = `
-function App() {
+export const SAMPLE_2 = `function App() {
   const values = useFetch('/api');
   useForm({
     defaultValues: {
@@ -45,8 +43,7 @@ function App() {
   });
 }
 `;
-export const SAMPLE_3 = `
-<TextField
+export const SAMPLE_3 = `<TextField
   label="Email"
   required
   isError={!!formState.errors.email}
@@ -83,11 +80,9 @@ const TextField = React.forwardRef(
   ),
 );
 `;
-export const SAMPLE_4 = `
-const { onChange, onBlur, name, ref } = register('email');
+export const SAMPLE_4 = `const { onChange, onBlur, name, ref } = register('email');
 `;
-export const SAMPLE_5 = `
-const Schema = z
+export const SAMPLE_5 = `const Schema = z
   .object({
     email: z.string().email({ message: 'Invalid email.' }),
     password: z
@@ -116,8 +111,7 @@ const Schema = z
     path: ['confirmPassword'],
   });
 `;
-export const SAMPLE_6 = `
-const isButtonDisabled = !formState.isDirty || !formState.isValid;
+export const SAMPLE_6 = `const isButtonDisabled = !formState.isDirty || !formState.isValid;
 
 return (
   <button

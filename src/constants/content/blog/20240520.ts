@@ -1,9 +1,7 @@
-export const SAMPLE_1 = `
-FROM node:18-alpine AS base
+export const SAMPLE_1 = `FROM node:18-alpine AS base
 RUN corepack enable
 `;
-export const SAMPLE_2 = `
-# Install dependencies only when needed
+export const SAMPLE_2 = `# Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
@@ -18,14 +16,12 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 `;
-export const SAMPLE_3 = `
-RUN \
+export const SAMPLE_3 = `RUN \
   if [ -f pnpm-lock.yaml ]; then pnpm i --frozen-lockfile && pnpm add sharp; \
   else echo "Lockfile not found." && exit 1; \
   fi
 `;
-export const SAMPLE_4 = `
-# Rebuild the source code only when needed
+export const SAMPLE_4 = `# Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
@@ -43,8 +39,7 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 `;
-export const SAMPLE_5 = `
-# Production image, copy all the files and run next
+export const SAMPLE_5 = `# Production image, copy all the files and run next
 FROM base AS runner
 WORKDIR /app
 
