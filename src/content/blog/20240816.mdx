@@ -19,18 +19,17 @@ import {
 
 ## TL;DR
 
-- 레거시 서비스 유지보수를 하면서 Model에서 SQL을 직접 작성해서 작업한 경험이 있습니다.
-- 그 때 정리했던 JOIN의 정의 및 자주 사용되는 문법 그리고 장점에 대해 다뤄보겠습니다.
+- Legacy 서비스 유지보수를 하면서 Model에서 SQL을 직접 작성하면서 정리했던 JOIN의 정의 및 자주 사용되는 문법 그리고 장점에 대해 다뤄보겠습니다.
 
 ## JOIN?
 
 JOIN은 관계형 데이터베이스에서 여러 테이블의 데이터를 결합하는 핵심 기능입니다. 테이블 간 관계는 1:1, 1:N, N:M으로 구분됩니다.
 
-## INNER vs (RIGHT/LEFT) OUTER
+## 이해하기
 
 이해를 쉽게 돕게하기 위해 가상의 테이블을 정의한 후 해당 데이터를 기준으로 설명하겠습니다.
 
-**_INIT SQL_**
+### **_INIT Database_**
 
 <Code code={TEST_TABLE_DDL} lang="sql" />
 
@@ -39,8 +38,6 @@ JOIN은 관계형 데이터베이스에서 여러 테이블의 데이터를 결�
 - 다음 사이트에서 SQL 테스트가 가능합니다.
 - 위 SQL을 상단 *INIT database*에 고정 후 하단에 **실습하기**에서 제공되는 예제 SQL을 *QUERY database*에 입력해 테스트가 가능합니다.
 - [SQL Fiddle](https://sqlfiddle.com/mysql/online-compiler)
-
-## 이해하기
 
 ### 왜 사용할까?
 
@@ -79,7 +76,9 @@ JOIN은 관계형 데이터베이스에서 여러 테이블의 데이터를 결�
 
 - 모든 JOIN에 대해서가 아닌 자주 사용되는 JOIN에 대해서만 예시 query를 작성해 소개 드리겠습니다.
 
-### INNER JOIN
+### QUERY database
+
+#### INNER JOIN
 
 <Code code={TEST_INNER_JOIN_QUERY} lang="sql" />
 
@@ -88,7 +87,7 @@ JOIN은 관계형 데이터베이스에서 여러 테이블의 데이터를 결�
 - 결과는 주문 날짜의 내림차순, 그 다음으로 소계의 내림차순으로 정렬됩니다.
 - 최종 가격(final_price)은 소계에서 할인을 뺀 값으로 계산됩니다.
 
-### LEFT (OUTER) JOIN
+#### LEFT (OUTER) JOIN
 
 <Code code={TEST_LEFT_OUTER_JOIN_QUERY} lang="sql" />
 

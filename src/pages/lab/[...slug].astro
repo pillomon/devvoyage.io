@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import Layout from '@/components/Templates/Layout/index.astro';
+import Edit from '@/components/Edit/index.astro';
 import { islands } from '@/islands';
 
 export const getStaticPaths = (() => {
@@ -31,16 +32,9 @@ const pageDescription = topic;
   <div class="w-full px-[30px] py-6">
     <Component />
   </div>
-  <div class="mx-auto mt-[50px] w-full max-w-[992px] px-[30px]">
-    <a
-      href=`https://github.com/pillomon/devvoyage.io/tree/main/src/islands/${slug}`
-      target="_blank"
-      rel="noopenner noreferer"
-      class="flex w-fit items-center gap-1 rounded-[6px] border-[1px] border-solid border-[#7a828e] bg-[#272B33] p-[16px] text-lg text-white medium:text-2xl"
-      >View code
-      <ion-icon
-        name="open-outline"
-        class="text-[16px] text-white medium:text-[20px]"></ion-icon></a
-    >
+  <div
+    class="mx-auto mt-[50px] flex w-full max-w-[992px] justify-end px-[30px]"
+  >
+    <Edit />
   </div>
 </Layout>
