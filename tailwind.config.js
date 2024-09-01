@@ -27,11 +27,11 @@ export default {
           css: {
             maxWidth: '100%',
             h2: {
-              fontSize: '30px',
+              fontSize: 30,
               lineHeight: `${calcLineHeight(30)}px`,
             },
             h3: {
-              fontSize: '24px',
+              fontSize: 24,
               lineHeight: `${calcLineHeight(24)}px`,
             },
             a: {

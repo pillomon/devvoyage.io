@@ -11,7 +11,7 @@ const isBlogPost = !!(paths[1] === 'blog' && paths[2]);
 <header
   class={cn(
     isBlogPost ? 'sticky left-0 top-0 flex flex-col' : '',
-    'w-full dark:bg-gray-800 bg-white',
+    'w-full backdrop-blur-md',
   )}
 >
   <div

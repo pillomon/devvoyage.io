@@ -39,11 +39,11 @@ window.open() method에 대해 크로스 브라우징을 점검하다 모바일 
 
 이와같이 비동기 콜백을 다루다 보니 차단이 되었던 것이고 문제가 없던 부분은 비동기 콜백을 다루지 않았던 부분으로 확인했습니다.
 
-## 해결 방법
+## Conclusion
 
 <Code code={SAMPLE_2} lang="javascript" />
 
-해결 방법으로는 일반적인 상황에서는 openLink를 그대로 사용하되 비동기적인 코드를 다루는 부분에서는 위와 같이 사용자 interaction(e.g. click)이 발생했을 때 *window.open('', '\_blank');*를 실행시켜 응답값인 WindowProxy를 변수에 담아두었다가 백엔드에서 url을 받아온 뒤 주입해주는 방식으로 변경했습니다.
+결론으로는 일반적인 상황에서는 openLink를 그대로 사용하되 비동기적인 코드를 다루는 부분에서는 위와 같이 사용자 interaction(e.g. click)이 발생했을 때 *window.open('', '\_blank');*를 실행시켜 응답값인 WindowProxy를 변수에 담아두었다가 백엔드에서 url을 받아온 뒤 주입해주는 방식으로 변경했습니다.
 
 이제는 Block Pop-ups가 Enabled 되어 있어도 잘 동작되는 것을 확인할 수 있었습니다.
 
