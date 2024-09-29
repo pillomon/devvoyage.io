@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://devvoyage.io/sitemap-index.xml
