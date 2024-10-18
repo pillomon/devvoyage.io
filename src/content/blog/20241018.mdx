@@ -1,0 +1,96 @@
+---
+isDraft: true
+title: (MY)SQL JOIN 가이드 for Beginer
+tags: [SQL, MySQL, JOIN]
+thumbnail:
+  src: https://images.unsplash.com/photo-1642775196125-38a9eb496568?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+  alt: 썸네일
+createdDate: 2024-10-18
+topic: 테이블 연결의 마법, JOIN! 어떻게 하면 데이터를 제대로 엮을 수 있을까요?
+bilingual: false
+---
+
+import Code from '@/components/Code/index.astro';
+import {
+  SAMPEL_1,
+  SAMPEL_2,
+  SAMPEL_3,
+} from '@/constants/content/blog/20241018.ts';
+
+## TL;DR
+
+- 무한 스크롤을 통해 아이템이 계속 추가되면서 DOM 노드가 많아져 iOS 웹뷰에서 백화현상이 발생했습니다. 화면에 보여지는 부분만 렌더링하는 기술인 virtualization(windowing)을 통해 해결한 사례를 공유합니다.
+
+## 패키지 선택
+![diagram](/images/blog/20241018/package-comparison.png)
+[패키지 비교 링크](https://npmtrends.com/@tanstack/react-virtual-vs-react-virtualized-vs-react-virtuoso-vs-react-window)
+여러가지 조건으로 두고봤을 때 
+1. 업데이트가 지속적으로 이뤄진다.
+2. 현재 표현되어있는 반응형과 관련해서 자동으로 지원해주는 부분이 있음.
+3. 패키지 사이즈가 작다.**(253KB)**
+4. 신뢰할만한 기업에서 해당 패키지를 비슷한 UI에서 적용한 사례가 있음.
+
+위와 같은 이유로 react-virtuoso를 선택했습니다.
+
+❗️사실 처음에는 @tanstack/react-virtual을 사용했지만, 반응형 UI에 대한 설명 및 지원이 친절하지 않은 것 같아 virtuoso의 공식문서를 보고 virtuoso로 변경했습니다.
+
+## 마크업 개선사항
+가상화 작업을 진행하기 전에 현재 UI의 html 구조 및 css 수정이 필요했다.
+flex의 wrap과 basis/grow/shrink를 적절히 사용하여 구현이 되어있던 기존 UI를 이것을 Virtualization 패키지가 Row에 대한 값을 산출할 수 있게 변경해야했다. 따라서 useWindowSize라는 커스텀 훅을 사용해서 현재 뷰포트를 고려해서 백엔드에서 받아온 아이템을 아래와 같은 구조로 재배치하는 코드를 작성했다.
+
+![diagram](/images/blog/20241018/package-comparison.png)
+
+360px 이상
+- 1 row 1 item
+768px 이상
+- 1 row 2 item
+1440px 이상
+- 1 row 3 item
+
+<Code code={SAMPEL_1} lang="typescript" />
+
+## Virtuoso 적용 이후
+
+<Code code={SAMPEL_2} lang="typescript" />
+
+1. 아이템의 높이를 자동으로 계산해주다보니 각 아이템(Row)의 높이에 대한 부분을 개발자가 추정하는 코드가 필요없어 상당히 편리했습니다. 덧붙여 반응형도 지원이 되었습니다.
+2. endReached라는 props를 사용하여 기존에 IntersectionObserver API를 사용하여 data fetching을 하던 코드를 제거하여 컴포넌트 가독성이 좋아졌습니다.
+3. useWindowScroll props가 제공됩니다. true로 설정하면 document 스크롤을 사용할 수 있어 UI 관련 고민을 덜 수 있어 좋았습니다.
+4. components props의 Footer에 컴포넌트를 주입해 로딩 상태의 컴포넌트를 표현하는 코드가 더 간결해졌습니다.
+
+## 스크롤 복원 문제점
+
+목록의 아이템을 클릭하면 Next.js <Link /> 컴포넌트의 기본 동작으로 스크롤이 유지되는데, 가상화를 적용한 뒤로는 아이템을 클릭하여 상세페이지로 이동한 뒤 브라우저의 뒤로가기 버튼 또는 UI의 백버튼을 사용하여 다시 목록으로 돌아왔을 때 스크롤이 유지되지 않는 문제가 발생했습니다. [목록 가상화의 마법 “우리 DOM이 달라졌어요”](https://techblog.pet-friends.co.kr/%EB%AA%A9%EB%A1%9D-%EA%B0%80%EC%83%81%ED%99%94%EC%9D%98-%EB%A7%88%EB%B2%95-%EC%9A%B0%EB%A6%AC-dom%EC%9D%B4-%EB%8B%AC%EB%9D%BC%EC%A1%8C%EC%96%B4%EC%9A%94-f8d0bca4681a) 펫프렌즈 기술블로그의 도움을 받아 해결할 수 있었습니다. 
+<Code code={SAMPEL_3} lang="typescript" />
+
+## 개선사항
+
+- article에서 div로 태그 변경되었습니다. 
+
+### 최초 화면
+
+- **AS-IS**
+![diagram](/images/blog/20241018/first-screen-as-is.png)
+- **TO-BE**
+![diagram](/images/blog/20241018/first-screen-to-be.png)
+
+- **AS-IS**
+![diagram](/images/blog/20241018/infinite-scroll-as-is.png)
+- **TO-BE**
+![diagram](/images/blog/20241018/infinite-scroll-to-be.png)
+
+- Chrome Task Manager에서 확인했을 때 메모리 사용량이 확실히 개선전보다 적은것을 확인할 수 있습니다.
+- Memory
+  - 144MB -> 101MB
+- JS Memory
+  - 26,352K -> 18,869K
+
+![diagram](/images/blog/20241018/memory.png)
+
+## References
+- [List Virtualization](https://www.patterns.dev/vanilla/virtual-lists)
+- [VirtualizedList(무한스크롤 리스트) 리팩토링 개발 이야기 - 오늘의집 블로그](https://www.bucketplace.com/post/2024-09-11-virtualizedlist-%EB%AC%B4%ED%95%9C%EC%8A%A4%ED%81%AC%EB%A1%A4-%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%EA%B0%9C%EB%B0%9C-%EC%9D%B4%EC%95%BC%EA%B8%B0/)
+- [Getting Started with React Virtuoso | React Virtuoso](https://virtuoso.dev/)
+- [목록 가상화의 마법 “우리 DOM이 달라졌어요”](https://techblog.pet-friends.co.kr/%EB%AA%A9%EB%A1%9D-%EA%B0%80%EC%83%81%ED%99%94%EC%9D%98-%EB%A7%88%EB%B2%95-%EC%9A%B0%EB%A6%AC-dom%EC%9D%B4-%EB%8B%AC%EB%9D%BC%EC%A1%8C%EC%96%B4%EC%9A%94-f8d0bca4681a)
+- [\[Virtualized List\] \#2. Virtualized List의 기능](https://hini7.tistory.com/259)
+
