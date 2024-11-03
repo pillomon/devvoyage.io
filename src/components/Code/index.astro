@@ -5,6 +5,7 @@ import type { ComponentProps } from 'astro/types';
 type Props = ComponentProps<typeof Code>;
 
 const { code, lang } = Astro.props;
+const trimmedCode = code.trim();
 ---
 
 <script>
@@ -66,7 +67,7 @@ const { code, lang } = Astro.props;
     >
   </div>
   <Code
-    code={code}
+    code={trimmedCode}
     lang={lang}
     theme="material-theme-darker"
     wrap={true}
