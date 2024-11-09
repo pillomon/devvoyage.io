@@ -1,1 +1,1 @@
-A personal blog by Pilsang SEONG.
+A personal blog by Pillsang SUNG.

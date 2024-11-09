@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { SignUpFormData, TextFieldProps } from './types';
 import { Form, useForm } from 'react-hook-form';
-import FormatLib from '@/libs/formatLib';
+import FormatLib from '@/libs/format-lib';
 import Schema from './schema';
 import React, { useEffect } from 'react';
 
