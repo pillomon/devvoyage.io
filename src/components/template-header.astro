@@ -1,6 +1,6 @@
 ---
-import FormatLib from '@/libs/formatLib';
-import ReadProgressBar from '@/components/ReadProgressBar/index.astro';
+import FormatLib from '@/libs/format-lib';
+import ReadProgressBar from '@/components/read-progress-bar.astro';
 
 const { pathname } = Astro.url;
 const { cn } = FormatLib;
@@ -38,7 +38,7 @@ const isBlogPost = !!(paths[1] === 'blog' && paths[2]);
       </li>
       <li class="flex">
         <a
-          href="https://www.linkedin.com/in/pilsang-seong-b4aba417a/"
+          href="https://www.linkedin.com/in/pillsang-sung/"
           target="_blank"
           rel="noreferrer noopener"
           class="flex"
