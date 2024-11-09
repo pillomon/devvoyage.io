@@ -10,7 +10,7 @@ topic: Next.js에서 react-virtuoso 패키지를 사용한 목록 가상화 작�
 bilingual: false
 ---
 
-import Code from '@/components/Code/index.astro';
+import SyntaxHighlighter from '@/components/syntax-highlighter.astro';
 import { SAMPLE_1, SAMPLE_2, SAMPLE_3 } from '@/content/code-sample/20241018';
 
 ## TL;DR
@@ -49,11 +49,11 @@ flex의 wrap과 basis/grow/shrink를 적절히 사용하여 구현이 되어있�
 
 - 1 row 3 item
 
-<Code code={SAMPLE_1} lang="typescript" />
+<SyntaxHighlighter code={SAMPLE_1} lang="typescript" />
 
 ## Virtuoso 적용 이후
 
-<Code code={SAMPLE_2} lang="tsx" />
+<SyntaxHighlighter code={SAMPLE_2} lang="tsx" />
 
 1. 아이템의 높이를 자동으로 계산해주다보니 각 아이템(Row)의 높이에 대한 부분을 개발자가 추정하는 코드가 필요없어 상당히 편리했습니다. 덧붙여 반응형도 지원이 되었습니다.
 2. endReached라는 props를 사용하여 기존에 IntersectionObserver API를 사용하여 data fetching을 하던 코드를 제거하여 컴포넌트 가독성이 좋아졌습니다.
@@ -66,7 +66,7 @@ flex의 wrap과 basis/grow/shrink를 적절히 사용하여 구현이 되어있�
 
 목록의 아이템을 클릭하면 Next.js `<Link />` 컴포넌트의 기본 동작으로 스크롤이 유지되는데, 가상화를 적용한 뒤로는 아이템을 클릭하여 상세페이지로 이동한 뒤 브라우저의 뒤로가기 버튼 또는 UI의 백버튼을 사용하여 다시 목록으로 돌아왔을 때 스크롤이 유지되지 않는 문제가 발생했습니다. [목록 가상화의 마법 “우리 DOM이 달라졌어요”](https://techblog.pet-friends.co.kr/%EB%AA%A9%EB%A1%9D-%EA%B0%80%EC%83%81%ED%99%94%EC%9D%98-%EB%A7%88%EB%B2%95-%EC%9A%B0%EB%A6%AC-dom%EC%9D%B4-%EB%8B%AC%EB%9D%BC%EC%A1%8C%EC%96%B4%EC%9A%94-f8d0bca4681a) 펫프렌즈 기술블로그의 도움을 받아 해결할 수 있었습니다.
 
-<Code code={SAMPLE_3} lang="typescript" />
+<SyntaxHighlighter code={SAMPLE_3} lang="typescript" />
 
 ## 개선사항
 

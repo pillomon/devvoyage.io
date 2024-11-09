@@ -10,7 +10,7 @@ topic: Docker를 이용하여 Next.js 이미지를 생성하는 방법을 공유
 bilingual: false
 ---
 
-import Code from '@/components/Code/index.astro';
+import SyntaxHighlighter from '@/components/syntax-highlighter.astro';
 import {
   SAMPLE_1,
   SAMPLE_2,
@@ -36,7 +36,7 @@ import {
 
 ## Base stage
 
-<Code code={SAMPLE_1} lang="dockerfile" />
+<SyntaxHighlighter code={SAMPLE_1} lang="dockerfile" />
 
 node:18-alpine는 기본 이미지로서 [Docker Hub](https://hub.docker.com)를 통해 본인에게 더 적합한 기본 이미지를 찾을 수 있습니다. 위 이미지는 nodejs 18버전을 사용합니다. alpine은 linux를 경량화하여 배포한 이미지로 보안에 특화되었고 불필요한 package와 daemon이 없으며 패키지 관리자로 apk를 사용합니다.
 
@@ -44,7 +44,7 @@ node:18-alpine는 기본 이미지로서 [Docker Hub](https://hub.docker.com)를
 
 ## Deps stage
 
-<Code code={SAMPLE_2} lang="dockerfile" />
+<SyntaxHighlighter code={SAMPLE_2} lang="dockerfile" />
 
 deps stage로 base 이미지를 그대로 가져와 사용합니다.
 
@@ -54,11 +54,11 @@ WORKDIR 명령어로 /app 디렉터리를 작업 디렉터리로 설정해 준 �
 
 또한 저는 sharp(이미지 최적화 패키지)를 linux 플랫폼과 호환되게 해당 stage에서 pnpm add를 통해 설치하였습니다.
 
-<Code code={SAMPLE_3} lang="dockerfile" />
+<SyntaxHighlighter code={SAMPLE_3} lang="dockerfile" />
 
 ## Builder stage
 
-<Code code={SAMPLE_4} lang="dockerfile" />
+<SyntaxHighlighter code={SAMPLE_4} lang="dockerfile" />
 
 builder stage로 deps와 동일하게 base 이미지를 그대로 가져와 사용합니다.
 
@@ -70,7 +70,7 @@ COPY를 완료한 뒤 RUN 명령어를 사용해 Next.js 프로젝트 build를 �
 
 ## Runner stage
 
-<Code code={SAMPLE_5} lang="dockerfile" />
+<SyntaxHighlighter code={SAMPLE_5} lang="dockerfile" />
 
 runner stage는 매우 간단합니다. 기존 stage에서 생성된 데이터 중 필요한 데이터를 가져와 서비스를 실행시키는 역할을 하고 있습니다.
 base 이미지를 그대로 가져오고 /app을 작업 디렉터리로 지정합니다. production 값을 가진 NODE_ENV라는 환경변수를 생성합니다.

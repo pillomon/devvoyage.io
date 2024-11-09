@@ -1,8 +1,11 @@
 ---
-import { Code } from 'astro:components';
-import type { ComponentProps } from 'astro/types';
+// import { Code } from 'astro:components';
+// import type { ComponentProps } from 'astro/types';
 
-type Props = ComponentProps<typeof Code>;
+// type Props = typeof Code;
+
+import { Code } from 'astro:components';
+type Props = Parameters<typeof Code>[0];
 
 const { code, lang } = Astro.props;
 const trimmedCode = code.trim();

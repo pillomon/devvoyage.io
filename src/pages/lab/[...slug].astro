@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import Layout from '@/components/Templates/Layout/index.astro';
-import Edit from '@/components/Edit/index.astro';
+import Layout from '@/components/template-layout.astro';
+import Edit from '@/components/edit.astro';
 import { islands } from '@/islands';
 
 export const getStaticPaths = (() => {
@@ -31,10 +31,5 @@ const pageDescription = topic;
   </div>
   <div class="w-full px-[30px] py-6">
     <Component />
-  </div>
-  <div
-    class="mx-auto mt-[50px] flex w-full max-w-[992px] justify-end px-[30px]"
-  >
-    <Edit />
   </div>
 </Layout>
