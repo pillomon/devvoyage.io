@@ -22,6 +22,19 @@ export default {
       fontFamily: {
         sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
       },
+      keyframes: {
+        rotate: {
+          '0%': {
+            transform: 'rotate(0deg)',
+          },
+          '100%': {
+            transform: 'rotate(360deg)',
+          },
+        },
+      },
+      animation: {
+        ani: 'rotate 3s linear infinite',
+      },
       typography: {
         DEFAULT: {
           css: {
