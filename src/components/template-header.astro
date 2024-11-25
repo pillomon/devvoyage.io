@@ -23,52 +23,16 @@ const isBlogPost = !!(paths[1] === 'blog' && paths[2]);
         >de<strong class="text-primary">vv</strong>oyage</span
       ></a
     >
-    <!-- <ul class="flex items-center gap-2">
-      <li class="flex">
-        <a
-          href="https://github.com/pillomon"
-          target="_blank"
-          rel="noreferrer noopener"
-          class="flex"
-        >
-          <ion-icon
-            name="logo-github"
-            class="text-[26px] text-secondary medium:text-[30px] dark:text-white"
-          ></ion-icon>
-        </a>
-      </li>
-      <li class="flex">
-        <a
-          href="https://www.linkedin.com/in/pillsang-sung/"
-          target="_blank"
-          rel="noreferrer noopener"
-          class="flex"
-        >
-          <ion-icon
-            name="logo-linkedin"
-            class="text-[26px] text-[rgb(13_91_186)] medium:text-[30px]"
-          ></ion-icon>
-        </a>
-      </li>
-    </ul> -->
-    <picture class="scale-105 cursor-pointer">
-      <Image src="/images/memoji.png" alt="test" width="40" height="40" />
-      <Picture
-        src="/images/memoji.png"
-        formats={['avif', 'webp']}
-        alt="A description of my image."
-      />
-    </picture>
-    <!--
-      <div
-      class="animate-ani flex h-[50px] w-[50px] items-center justify-center rounded-[50%] border-[3px] border-t-[3px] border-solid border-[#FE444425] border-t-red-500"
-    >
-      <div
-        class="animate-ani h-[30px] w-[30px] rounded-[50%] border-[3px] border-t-[3px] border-solid border-[#FEE84422] border-t-[#F9CE24]"
+    <div class="flex items-center">
+      <span class="inline-block text-xl font-bold italic">by</span>
+      <a
+        href="https://bento.me/pillsang"
+        target="_blank"
+        rel="noreferrer noopener"
       >
-      </div>
-    </Ima>
-  </div> -->
+        <Image src="/images/memoji.png" alt="test" width="40" height="40" />
+      </a>
+    </div>
     <ReadProgressBar isVisible={isBlogPost} />
   </div>
 </header>
