@@ -13,6 +13,7 @@ export default {
       medium: '768px',
       large: '992px',
       extra: '1200px',
+      'can-hover': { raw: '(hover: hover)' },
     },
     extend: {
       colors: {
