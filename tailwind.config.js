@@ -1,8 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 
 const calcLineHeight = (fontSize) => fontSize * 1.5;
-const primaryColor = '#FFBE98';
-const secondaryColor = '#04080D';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -14,11 +13,13 @@ export default {
       large: '992px',
       extra: '1200px',
       'can-hover': { raw: '(hover: hover)' },
+      'has-fine-pointer': { raw: '(any-pointer: fine)' },
+      'has-pointer': { raw: '(any-pointer: coarse)' },
     },
     extend: {
       colors: {
-        primary: primaryColor,
-        secondary: secondaryColor,
+        primary: 'var(--primary-color)',
+        secondary: 'var(--secondary-color)',
       },
       fontFamily: {
         sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
@@ -36,9 +37,9 @@ export default {
               lineHeight: `${calcLineHeight(24)}px`,
             },
             a: {
-              color: '#FFFFFF',
+              color: colors.white,
               '&:hover': {
-                color: primaryColor,
+                color: 'var(--primary-color)',
               },
               textDecoration: 'none',
             },

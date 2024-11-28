@@ -30,7 +30,7 @@ const alternativeImage =
 
 <article
   id=`article-${slug}`
-  class="group w-full transition-all hover:scale-[1.005]"
+  class="can-hover:hover:scale-[1.005] group w-full transition-all"
 >
   <a
     href={`/blog/${slug}`}
@@ -43,14 +43,14 @@ const alternativeImage =
         thumbnail ? (
           <Image
             src={thumbnail.src}
-            alt={thumbnail?.alt}
+            alt={thumbnail.alt}
             inferSize
             class="h-full w-full object-cover"
           />
         ) : (
           <Image
             src={alternativeImage}
-            alt="thumbnail"
+            alt="Post thumbnail image."
             class="h-full w-full object-cover"
           />
         )
