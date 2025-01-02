@@ -7,33 +7,63 @@ const { isVisible } = Astro.props;
 ---
 
 <script>
-  import EventLib from '@/libs/event-lib';
+  let ticking = false;
+  let lastKnownScrollPosition = 0;
+  let rafId: number | null = null;
+
   const updateScrollIndicator = () => {
-    const winScroll =
-      document.body.scrollTop || document.documentElement.scrollTop;
+    // 소수점 둘째자리까지 계산하여 더 부드러운 움직임 구현
+    const winScroll = window.scrollY;
     const height =
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    const ScrollIndicatorEl = document.getElementById('scroll-indicator');
-    if (ScrollIndicatorEl) ScrollIndicatorEl.style.width = scrolled + '%';
+    const scrolled = Math.min(
+      100,
+      Number(((winScroll / height) * 100).toFixed(2)),
+    );
+
+    const scrollIndicatorEl = document.getElementById('scroll-indicator');
+    if (scrollIndicatorEl) {
+      console.log(scrollIndicatorEl);
+      scrollIndicatorEl.style.transform = `translateX(${scrolled - 100}%)`;
+    }
+
+    // 스크롤이 끝나지 않았다면 다음 프레임 요청
+    if (Math.abs(lastKnownScrollPosition - winScroll) > 0.1) {
+      rafId = requestAnimationFrame(updateScrollIndicator);
+    } else {
+      ticking = false;
+    }
+  };
+  const onScroll = () => {
+    lastKnownScrollPosition = window.scrollY;
+
+    if (!ticking) {
+      ticking = true;
+      rafId = requestAnimationFrame(updateScrollIndicator);
+    }
+  };
+  const cleanup = () => {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+    }
+    window.removeEventListener('scroll', onScroll);
   };
 
-  const throttledUpdateScrollIndicator = EventLib.throttle(
-    updateScrollIndicator,
-    75,
-  );
-
-  window.onscroll = function () {
-    throttledUpdateScrollIndicator();
-  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cleanup();
+    }
+  });
 </script>
 {
-  isVisible ? (
+  isVisible && (
     <div class="h-[5px] w-full bg-transparent">
-      <div id="scroll-indicator" class="h-full w-0 bg-primary transition-all" />
+      <div
+        id="scroll-indicator"
+        class="h-full w-full translate-x-[-100%] transform bg-primary duration-100 ease-out"
+      />
     </div>
-  ) : (
-    false
   )
 }
