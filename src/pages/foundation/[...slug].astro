@@ -2,22 +2,21 @@
 import type { GetStaticPaths } from 'astro';
 import Layout from '@/components/template-layout.astro';
 import Edit from '@/components/edit.astro';
-import { islands } from '@/islands';
+import { getCollection } from 'astro:content';
 
-export const getStaticPaths = (() => {
-  return islands.map(({ slug, title, topic, component }) => {
-    return {
-      params: { slug },
-      props: { title, topic, component },
-    };
-  });
-}) satisfies GetStaticPaths;
+export async function getStaticPaths() {
+  const ballEntries = await getCollection('ball');
+  return ballEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry: entry },
+  }));
+}
 
-const { slug } = Astro.params;
-const { title, topic, component: Component } = Astro.props;
+const { entry } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await entry.render();
 
-const pageTitle = title;
-const pageDescription = topic;
+const pageTitle = `${entry.data.title}`;
+const pageDescription = `${entry.data.topic}`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>

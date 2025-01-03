@@ -4,7 +4,6 @@ import Prose from '@/components/prose.astro';
 import Edit from '@/components/edit.astro';
 import { getCollection } from 'astro:content';
 
-export const prerender = true;
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
   return blogEntries.map((entry) => ({

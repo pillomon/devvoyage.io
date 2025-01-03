@@ -18,6 +18,17 @@ const blogCollection = defineCollection({
     bilingual: z.boolean(),
   }),
 });
+const ballCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    isDraft: z.boolean().default(true),
+    title: z.string(),
+    createdDate: z.date(),
+    modifiedDate: z.date().optional(),
+    bilingual: z.boolean(),
+  }),
+});
 export const collections = {
   blog: blogCollection,
+  ball: ballCollection,
 };
