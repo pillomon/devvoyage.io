@@ -1,0 +1,107 @@
+---
+
+---
+
+<div id="three-container" class="mx-auto w-full max-w-[1440px]"></div>
+
+<script>
+  import * as THREE from 'three';
+  import {
+    GLTFLoader,
+    GLTFParser,
+  } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+  function initThreeJS() {
+    const container = document.getElementById('three-container');
+    let scene!: THREE.Scene,
+      camera!: THREE.PerspectiveCamera,
+      renderer!: THREE.WebGLRenderer;
+
+    // 크기 조정 및 렌더링 함수
+    const updateSize = () => {
+      const rect = container?.getBoundingClientRect();
+      const width = rect?.width || 1440;
+      const height = rect?.height || 800;
+
+      if (camera) {
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      }
+
+      if (renderer) {
+        renderer.setSize(width, height);
+      }
+    };
+
+    // Scene 만들기
+    scene = new THREE.Scene();
+
+    // 초기 크기 가져오기
+    const rect = container?.getBoundingClientRect() ?? {
+      width: 1440,
+      height: 800,
+    };
+
+    // Camera 만들기
+    camera = new THREE.PerspectiveCamera(
+      75,
+      rect.width / rect.height,
+      0.1,
+      1000,
+    );
+    camera.position.set(0, 2, 6);
+
+    // Renderer 만들기
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(rect.width, rect.height);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container?.appendChild(renderer.domElement);
+
+    // 조명 추가
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    // GLB 모델 로드
+    const loader = new GLTFLoader();
+    loader.load(
+      '/3d/LP_Officeroom2.glb',
+      (gltf) => {
+        scene.add(gltf.scene);
+        gltf.scene.scale.set(0.5, 0.5, 0.5);
+        gltf.scene.position.set(0, 1, 1);
+        // gltf.scene.rotation.set(0, Math.PI, 0);
+
+        // 추가된 부분: 모델 로드 후 강제 리사이즈 및 렌더링
+        window.dispatchEvent(new Event('resize')); // 강제로 리사이즈 이벤트 발생
+        renderer.render(scene, camera); // 추가 렌더링 호출
+      },
+      (progress) => {
+        console.log(
+          'Loading progress:',
+          (progress.loaded / progress.total) * 100 + '%',
+        );
+      },
+      (error) => {
+        console.error('An error occurred while loading the model:', error);
+      },
+    );
+
+    // 애니메이션 루프
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // 리사이즈 이벤트
+    window.addEventListener('resize', updateSize);
+  }
+
+  // DOM이 로드된 후 실행
+  document.addEventListener('DOMContentLoaded', initThreeJS);
+</script>
