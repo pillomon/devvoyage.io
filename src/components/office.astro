@@ -1,0 +1,127 @@
+---
+
+---
+
+<div
+  id="three-container"
+  class="aspect-square w-full bg-opacity-0 transition-all"
+>
+</div>
+<div id="loading" class="fixed left-0 top-0 h-screen w-screen backdrop-blur-md">
+</div>
+
+<script>
+  import * as THREE from 'three';
+  import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+
+  const Z_DEPTH = 10;
+
+  const initScene = () => {
+    const threeContainer = document.getElementById('three-container');
+
+    if (!threeContainer) return;
+
+    // Scene 생성
+    const scene = new THREE.Scene();
+
+    // Camera 설정
+    const rect = threeContainer.getBoundingClientRect();
+    const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 1000);
+    camera.position.set(0, 0, Z_DEPTH);
+
+    // Renderer 설정
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+    });
+    renderer.setSize(rect.width, rect.height);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    threeContainer.appendChild(renderer.domElement);
+
+    // OrbitControls 설정
+    // const controls = new OrbitControls(camera, renderer.domElement);
+    // controls.enableDamping = true; // 부드러운 애니메이션
+    // controls.dampingFactor = 0.05;
+    // controls.minDistance = Z_DEPTH; // 최소 줌 거리
+    // controls.maxDistance = Z_DEPTH; // 최대 줌 거리
+    // controls.minPolarAngle = 0; // 최소 수직 회전 각도
+    // controls.maxPolarAngle = Math.PI; // 최대 수직 회전 각도 (약 120도)
+    // controls.enablePan = false; // 패닝 비활성화
+
+    // 기본 조명 추가
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
+
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(5, 5, 5);
+    scene.add(directionalLight);
+
+    let earthModel: THREE.Group<THREE.Object3DEventMap>;
+
+    // GLB 모델 로드
+    const loader = new GLTFLoader();
+    loader.load(
+      '/3d/earth-oceanic.glb',
+      (gltf) => {
+        // 모델의 바운딩 박스 계산
+        const box = new THREE.Box3().setFromObject(gltf.scene);
+        const size = box.getSize(new THREE.Vector3());
+        const center = box.getCenter(new THREE.Vector3());
+
+        // 모델 크기에 따라 적절한 스케일 계산
+        const maxSize = Math.max(size.x, size.y, size.z);
+        const scale = 4 / maxSize; // 뷰포트의 4분의 1 크기로 맞추기
+
+        gltf.scene.scale.setScalar(scale);
+        gltf.scene.position.set(
+          -center.x * scale,
+          -center.y * scale,
+          -center.z * scale,
+        );
+
+        earthModel = gltf.scene;
+        scene.add(gltf.scene);
+      },
+      (progress) => {
+        if (progress.loaded === progress.total) {
+          const loadingContainer = document.getElementById('loading');
+
+          if (!loadingContainer) return;
+
+          threeContainer.style.opacity = '1';
+          threeContainer.style.transform = 'scale(1)';
+          loadingContainer.style.display = 'none';
+        }
+      },
+      (error) => {
+        console.error('모델 로드 중 에러 발생:', error);
+      },
+    );
+
+    // 화면 리사이즈 대응
+    const handleResize = () => {
+      const newRect = threeContainer.getBoundingClientRect();
+      camera.aspect = 1; // 유지
+      camera.updateProjectionMatrix();
+      renderer.setSize(newRect.width, newRect.width);
+    };
+    window.addEventListener('resize', handleResize);
+
+    // 렌더링
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // 모델이 로드된 경우에만 회전
+      if (earthModel) {
+        earthModel.rotation.y += 0.005; // 회전 속도 조절
+      }
+
+      renderer.render(scene, camera);
+    }
+    animate();
+  };
+
+  // Astro 페이지 로드 시 초기화
+  document.addEventListener('DOMContentLoaded', initScene);
+</script>
