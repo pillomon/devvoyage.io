@@ -100,16 +100,6 @@
           }
         }
       },
-      (progress) => {
-        if (progress.loaded === progress.total) {
-          const loadingContainer = document.getElementById('loading');
-
-          if (!loadingContainer) return;
-
-          threeContainer.style.opacity = '1';
-          loadingContainer.style.display = 'none';
-        }
-      },
       (error) => {
         console.error('모델 로드 중 에러 발생:', error);
       },
