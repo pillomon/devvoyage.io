@@ -78,27 +78,10 @@
 
         earthModel = gltf.scene;
         scene.add(gltf.scene);
-      },
-      (progress) => {
-        // 진행상황 콜백
-        if (progress.loaded === progress.total) {
-          const loadingContainer = document.getElementById('loading');
-          const threeContainer = document.getElementById('three-container');
 
-          if (loadingContainer) {
-            loadingContainer.style.opacity = '0';
-            loadingContainer.style.transition = 'opacity 0.5s ease';
+        const loadingContainer = document.getElementById('loading');
 
-            setTimeout(() => {
-              loadingContainer.style.display = 'none';
-            }, 500);
-          }
-
-          if (threeContainer) {
-            threeContainer.style.opacity = '1';
-            threeContainer.style.transition = 'opacity 0.5s ease';
-          }
-        }
+        if (loadingContainer) loadingContainer.remove();
       },
       (error) => {
         console.error('모델 로드 중 에러 발생:', error);
