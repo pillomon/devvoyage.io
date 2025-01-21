@@ -15,8 +15,9 @@
 
   const initScene = () => {
     const threeContainer = document.getElementById('three-container');
+    const loadingContainer = document.getElementById('loading');
 
-    if (!threeContainer) return;
+    if (!threeContainer || !loadingContainer) return;
 
     // Scene 생성
     const scene = new THREE.Scene();
@@ -83,9 +84,7 @@
         earthModel = gltf.scene;
         scene.add(gltf.scene);
 
-        const loadingContainer = document.getElementById('loading');
-
-        if (loadingContainer) loadingContainer.remove();
+        loadingContainer.remove();
       },
       (error) => {
         console.error('모델 로드 중 에러 발생:', error);
