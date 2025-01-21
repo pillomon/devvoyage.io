@@ -36,14 +36,18 @@
     threeContainer.appendChild(renderer.domElement);
 
     // OrbitControls 설정
-    // const controls = new OrbitControls(camera, renderer.domElement);
-    // controls.enableDamping = true; // 부드러운 애니메이션
-    // controls.dampingFactor = 0.05;
-    // controls.minDistance = Z_DEPTH; // 최소 줌 거리
-    // controls.maxDistance = Z_DEPTH; // 최대 줌 거리
-    // controls.minPolarAngle = 0; // 최소 수직 회전 각도
-    // controls.maxPolarAngle = Math.PI; // 최대 수직 회전 각도 (약 120도)
-    // controls.enablePan = false; // 패닝 비활성화
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true; // 부드러운 애니메이션
+    controls.dampingFactor = 0.05;
+    controls.enableZoom = false;
+    controls.enablePan = false;
+    controls.rotateSpeed = 0.8;
+    controls.minPolarAngle = 0; // 최소 수직 회전 각도
+    controls.maxPolarAngle = Math.PI; // 최대 수직 회전 각도 (약 120도)
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN, // 두 손가락 제스처 비활성화
+    };
 
     // 기본 조명 추가
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
