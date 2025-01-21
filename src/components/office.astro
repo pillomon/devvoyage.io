@@ -2,11 +2,7 @@
 
 ---
 
-<div
-  id="three-container"
-  class="aspect-square w-full bg-opacity-0 transition-all"
->
-</div>
+<div id="three-container" class="aspect-square w-full bg-opacity-0"></div>
 <div id="loading" class="fixed left-0 top-0 h-screen w-screen backdrop-blur-md">
 </div>
 
@@ -84,13 +80,33 @@
         scene.add(gltf.scene);
       },
       (progress) => {
+        // 진행상황 콜백
+        if (progress.loaded === progress.total) {
+          const loadingContainer = document.getElementById('loading');
+          const threeContainer = document.getElementById('three-container');
+
+          if (loadingContainer) {
+            loadingContainer.style.opacity = '0';
+            loadingContainer.style.transition = 'opacity 0.5s ease';
+
+            setTimeout(() => {
+              loadingContainer.style.display = 'none';
+            }, 500);
+          }
+
+          if (threeContainer) {
+            threeContainer.style.opacity = '1';
+            threeContainer.style.transition = 'opacity 0.5s ease';
+          }
+        }
+      },
+      (progress) => {
         if (progress.loaded === progress.total) {
           const loadingContainer = document.getElementById('loading');
 
           if (!loadingContainer) return;
 
           threeContainer.style.opacity = '1';
-          threeContainer.style.transform = 'scale(1)';
           loadingContainer.style.display = 'none';
         }
       },
