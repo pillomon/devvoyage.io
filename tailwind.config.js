@@ -12,9 +12,8 @@ export default {
       medium: '768px',
       large: '992px',
       extra: '1200px',
-      'can-hover': { raw: '(hover: hover)' },
-      'has-fine-pointer': { raw: '(any-pointer: fine)' },
-      'has-pointer': { raw: '(any-pointer: coarse)' },
+      'can-hover': { raw: '(hover: hover) and (pointer: fine)' },
+      'has-fine-pointer': { raw: '(pointer: fine)' },
     },
     extend: {
       colors: {
@@ -22,7 +21,8 @@ export default {
         secondary: 'var(--secondary-color)',
       },
       fontFamily: {
-        sans: ['"Proxima Nova"', ...defaultTheme.fontFamily.sans],
+        sans: ['Proxima Nova', ...defaultTheme.fontFamily.sans],
+        'other-hand': ['OtherHand'],
       },
       typography: {
         DEFAULT: {

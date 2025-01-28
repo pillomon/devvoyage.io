@@ -2,7 +2,7 @@
 import Layout from '@/components/template-layout.astro';
 import Office from '@/components/office.astro';
 
-import Card, { type Props } from '@/components/card-lab.astro';
+import Card from '@/components/card-attic.astro';
 
 const pageTitle = 'Attic';
 const pageDescription = `Where peaceful coding meets daily life - a cozy space for UI adventures and simple stories.`;
@@ -10,4 +10,10 @@ const pageDescription = `Where peaceful coding meets daily life - a cozy space f
 
 <Layout title={pageTitle} description={pageDescription}>
   <Office />
+  <section class="flex w-full flex-col items-center gap-10">
+    <Card title="notes" bgColor="attic-card-slate" />
+    <Card title="react" bgColor="attic-card-zinc" />
+    <Card title="dumb as chatbot" bgColor="attic-card-stone" />
+    <Card title="n/a" bgColor="attic-card-gray" />
+  </section>
 </Layout>

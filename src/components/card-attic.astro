@@ -1,0 +1,22 @@
+---
+export interface Props {
+  title: string;
+  bgColor:
+    | 'attic-card-slate'
+    | 'attic-card-zinc'
+    | 'attic-card-stone'
+    | 'attic-card-gray';
+}
+
+const { title, bgColor } = Astro.props;
+const slug = title;
+---
+
+<article
+  id="attic-card"
+  class=`${bgColor} h-[100px] w-full transition-all can-hover:hover:cursor-pointer rounded-md p-4`
+>
+  <a href=`/attic/${slug}` class="inline-block h-full w-full">
+    <span class="inline-block font-other-hand text-xl">{title}</span>
+  </a>
+</article>
